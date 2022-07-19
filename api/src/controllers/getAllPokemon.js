@@ -1,13 +1,18 @@
-const axios = require('axios').default,
-  { Pokemon } = require('../db.js'),
-  { getPokemonsFromAPI } = require('./auxFunctions/getPokemonsFromAPI');
+const { getPokemonsFromDB } = require('../services/pokeDb');
+const { getPokemonsFromAPI } = require('../services/pokeApi');
 
 module.exports = {
   getAllPokemon: async function (req, res) {
-    try {
-      res.json(await getPokemonsFromAPI().then((data) => data));
-    } catch (error) {
-      throw new Error();
-    }
+    const { name } = req.query;
+    let pokemonsFromApi = await getPokemonsFromAPI();
+    let pokemonsFromDb = await getPokemonsFromDB();
+    pokemonsFromDb.forEach((p) => {
+      p.types = p.types.map((t) => t.name);
+    });
+
+    let result = [...pokemonsFromApi, ...pokemonsFromDb];
+    if (name) result = result.filter((poke) => poke.name === name);
+
+    return res.json(result);
   },
 };

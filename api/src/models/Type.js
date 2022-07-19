@@ -7,6 +7,7 @@ module.exports = (sequelize) => {
     {
       name: {
         type: DataTypes.STRING,
+        unique: true,
       },
     },
     { timestamps: false }

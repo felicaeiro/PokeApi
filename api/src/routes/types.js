@@ -1,4 +1,6 @@
-const { Router } = require('express');
-const router = Router();
+const { Router } = require('express'),
+  { getTypes } = require('../controllers/getTypes'),
+  router = Router();
 
+router.get('', getTypes);
 module.exports = router;
