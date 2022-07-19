@@ -15,6 +15,9 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        set(value) {
+          this.setDataValue('name', value.toLowerCase());
+        },
       },
       life: DataTypes.INTEGER,
       attack: DataTypes.INTEGER,

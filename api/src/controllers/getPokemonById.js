@@ -1,12 +1,17 @@
-module.exports = {
-  getPokemonById: async function (req, res) {
-    const { idPokemon } = req.params;
+const { getPokemonByIdFromApi } = require('../services/pokeApi');
+const { getPokemonByIdFromDb } = require('../services/pokeDb');
 
-    // if (idPokemon) {
-    //   const filtered = allPokemons.filter(
-    //     (poke) => String(poke.id) === idPokemon
-    //   );
-    //   return res.json(filtered);
-    // }
+module.exports = {
+  getPokemonById: async function (req, res, next) {
+    const { idPokemon } = req.params;
+    try {
+      if (Number(idPokemon)) {
+        res.json(await getPokemonByIdFromApi(idPokemon));
+      } else {
+        res.json(await getPokemonByIdFromDb(idPokemon));
+      }
+    } catch (error) {
+      next(error);
+    }
   },
 };

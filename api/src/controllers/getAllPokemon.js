@@ -2,17 +2,29 @@ const { getPokemonsFromDB } = require('../services/pokeDb');
 const { getPokemonsFromAPI } = require('../services/pokeApi');
 
 module.exports = {
-  getAllPokemon: async function (req, res) {
-    const { name } = req.query;
-    let pokemonsFromApi = await getPokemonsFromAPI();
-    let pokemonsFromDb = await getPokemonsFromDB();
-    pokemonsFromDb.forEach((p) => {
-      p.types = p.types.map((t) => t.name);
-    });
+  getAllPokemon: async function (req, res, next) {
+    try {
+      let { name } = req.query;
 
-    let result = [...pokemonsFromApi, ...pokemonsFromDb];
-    if (name) result = result.filter((poke) => poke.name === name);
+      const pokemonsFromApi = await getPokemonsFromAPI();
+      const pokemonsFromDb = await getPokemonsFromDB();
+      pokemonsFromDb.forEach((x) => {
+        x.types = x.types.map((t) => t.name);
+      });
 
-    return res.json(result);
+      let result = [...pokemonsFromApi, ...pokemonsFromDb];
+      if (name) {
+        name = name.toLowerCase();
+        result = result.filter((poke) => poke.name === name);
+        if (result.length === 0) {
+          const error = new Error(`The Pokemon ${name} doesn't exist`);
+          error.status = 404;
+          throw error;
+        }
+      }
+      res.json(result);
+    } catch (error) {
+      next(error);
+    }
   },
 };
