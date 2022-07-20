@@ -1,38 +1,55 @@
 const { Pokemon, Type } = require('../db');
+const {
+  validatePokemonParameters,
+} = require('../validators/validateNewPokemon');
+
+const includeTypes = {
+  include: {
+    model: Type,
+    as: 'types',
+    attributes: ['name'],
+    through: { attributes: [] },
+  },
+};
+
+fixTypes = (pokemon) => {
+  pokemon = pokemon.get({ plain: true });
+  pokemon.types = pokemon.types.map((t) => t.name);
+  return pokemon;
+};
 
 getPokemonsFromDB = async () => {
-  const allPokemons = await Pokemon.findAll({
+  let allPokemons = await Pokemon.findAll({
     attributes: ['name'],
-    include: {
-      model: Type,
-      as: 'types',
-      attributes: ['name'],
-      through: { attributes: [] },
-    },
+    ...includeTypes,
   }).catch((error) => {
     error.status = 503;
     error.message = 'Unable to get Pokemons';
     throw error;
   });
 
-  return allPokemons.map((data) => data.get({ plain: true }));
+  return allPokemons.map((x) => fixTypes(x));
 };
 
 getPokemonByIdFromDb = async (id) => {
-  return await Pokemon.findByPk(id).catch((error) => {
+  id = id.toUpperCase();
+  let pokeById = await Pokemon.findByPk(id, includeTypes).catch((error) => {
     error.status = 404;
     error.message = `The id doesn't belong to any Pokemon`;
     throw error;
   });
+
+  return fixTypes(pokeById);
 };
 
 createPokemon = async (pokemonCreate) => {
-  let { name, types, life, attack, defense, speed, height, weight } =
+  let { name, types, hp, attack, defense, speed, height, weight } =
     pokemonCreate;
+
   if (
     !name ||
     !types ||
-    !life ||
+    !hp ||
     !attack ||
     !defense ||
     !speed ||
@@ -43,7 +60,6 @@ createPokemon = async (pokemonCreate) => {
     error.status = 422;
     throw error;
   }
-
   const type = await Type.findAll({ where: { name: types } });
 
   if (type.length === 0) {
@@ -54,7 +70,7 @@ createPokemon = async (pokemonCreate) => {
 
   const newPoke = await Pokemon.create({
     name,
-    life,
+    hp,
     attack,
     defense,
     speed,
@@ -69,16 +85,12 @@ createPokemon = async (pokemonCreate) => {
   await newPoke.addType(type);
 
   name = name.toLowerCase();
-  const result = await Pokemon.findOne({
+  let result = await Pokemon.findOne({
     where: { name },
-    include: {
-      model: Type,
-      as: 'types',
-      attributes: ['name'],
-      through: { attributes: [] },
-    },
+    ...includeTypes,
   });
-  return result;
+
+  return fixTypes(result);
 };
 
 getTypesFromDb = async () => {

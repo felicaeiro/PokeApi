@@ -8,9 +8,6 @@ module.exports = {
 
       const pokemonsFromApi = await getPokemonsFromAPI();
       const pokemonsFromDb = await getPokemonsFromDB();
-      pokemonsFromDb.forEach((x) => {
-        x.types = x.types.map((t) => t.name);
-      });
 
       let result = [...pokemonsFromApi, ...pokemonsFromDb];
       if (name) {

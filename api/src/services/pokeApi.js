@@ -43,7 +43,7 @@ getPokemonUrl = async (url) => {
       name: response.data.name,
       types: response.data.types.map((t) => t.type.name),
       img: response.data.sprites.other.dream_world.front_default,
-      life: response.data.stats[0].base_stat,
+      hp: response.data.stats[0].base_stat,
       attack: response.data.stats[1].base_stat,
       defense: response.data.stats[2].base_stat,
       speed: response.data.stats[5].base_stat,

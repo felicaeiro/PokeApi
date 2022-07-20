@@ -19,12 +19,48 @@ module.exports = (sequelize) => {
           this.setDataValue('name', value.toLowerCase());
         },
       },
-      life: DataTypes.INTEGER,
-      attack: DataTypes.INTEGER,
-      defense: DataTypes.INTEGER,
-      speed: DataTypes.INTEGER,
-      height: DataTypes.INTEGER,
-      weight: DataTypes.INTEGER,
+      hp: {
+        type: DataTypes.INTEGER,
+        validate: {
+          min: 1,
+          max: 300,
+        },
+      },
+      attack: {
+        type: DataTypes.INTEGER,
+        validate: {
+          min: 1,
+          max: 200,
+        },
+      },
+      defense: {
+        type: DataTypes.INTEGER,
+        validate: {
+          min: 1,
+          max: 250,
+        },
+      },
+      speed: {
+        type: DataTypes.INTEGER,
+        validate: {
+          min: 1,
+          max: 200,
+        },
+      },
+      height: {
+        type: DataTypes.INTEGER,
+        validate: {
+          min: 1,
+          max: 200,
+        },
+      },
+      weight: {
+        type: DataTypes.INTEGER,
+        validate: {
+          min: 1,
+          max: 1000,
+        },
+      },
     },
     { timestamps: false }
   );
