@@ -1,0 +1,28 @@
+.navBar {
+  background-color: rgb(162, 3, 3);
+}
+.container {
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 4rem;
+}
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.logo {
+  transition: 1.5s;
+}
+
+.logo:hover {
+  transform: rotate(720deg);
+}
+
+a {
+  text-decoration: none;
+}

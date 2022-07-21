@@ -19,10 +19,7 @@ fixTypes = (pokemon) => {
 };
 
 getPokemonsFromDB = async () => {
-  let allPokemons = await Pokemon.findAll({
-    attributes: ['name'],
-    ...includeTypes,
-  }).catch((error) => {
+  let allPokemons = await Pokemon.findAll(includeTypes).catch((error) => {
     error.status = 503;
     error.message = 'Unable to get Pokemons';
     throw error;

@@ -1,0 +1,36 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  background-image: url('../../img/landingpage.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.button {
+  margin: auto;
+  max-width: max-content;
+  padding-top: 80vh;
+}
+
+.button button {
+  margin: auto;
+  width: 15rem;
+  height: 4rem;
+  font-size: 1rem;
+  font-weight: bolder;
+  font-family: 'Inter', sans-serif;
+  background-color: transparent;
+  color: black;
+  padding: 10px 30px;
+  border: 1px solid black;
+  border-radius: 50px;
+  transition: 0.3s;
+}
+
+.button button:hover {
+  background-color: rgba(2, 2, 2, 0.8);
+  color: rgb(236, 69, 69);
+  cursor: pointer;
+}

@@ -29,6 +29,7 @@ getPokemonsFromAPI = async () => {
   );
 
   return allData.map((x) => ({
+    id: x.id,
     name: x.name,
     img: x.img,
     types: x.types,
