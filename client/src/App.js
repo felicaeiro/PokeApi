@@ -2,10 +2,10 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
 import LandingPage from './components/LandingPage/LandingPage';
-import Home from './components/Home/Home';
 import PokemonDetail from './components/PokemonDetail/PokemonDetail';
 import CreatePokemon from './components/CreatePokemon/CreatePokemon';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import Home from './containers/Home/Home';
 
 function App() {
   return (

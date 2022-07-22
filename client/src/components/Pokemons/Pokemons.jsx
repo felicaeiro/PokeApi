@@ -1,8 +1,9 @@
 import React from 'react';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import card from '../../img/card.png';
+import Pagination from '../Pagination/Pagination';
 
-export const Pokemons = ({ pokesToRender }) => {
+const Pokemons = ({ pokesToRender, totalPokemons, onPagination }) => {
   return (
     <div>
       {pokesToRender.map((p) => (
@@ -14,6 +15,14 @@ export const Pokemons = ({ pokesToRender }) => {
           img={p.img ? p.img : card}
         />
       ))}
+
+      <Pagination
+        pokesPerPage={12}
+        totalPokes={totalPokemons}
+        onPagination={onPagination}
+      />
     </div>
   );
 };
+
+export default Pokemons;

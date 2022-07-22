@@ -1,11 +1,11 @@
 import {
   GET_ALL_POKEMONS,
   GET_ALL_TYPES,
-  SORT,
   LOADING,
   GET_POKEMON_DETAIL,
   PAGINATION,
   SET_VISIBILITY_FILTER,
+  SET_SORTER,
 } from '../constants/index';
 
 export const getAllPokemon = () => {
@@ -40,7 +40,6 @@ export const getPokemonDetail = (idPokemon) => {
       );
   };
 };
-//{ key:'', value:'' }
 
 export const setVisibilityFilter = (filter) => {
   return { type: SET_VISIBILITY_FILTER, payload: filter };
@@ -48,7 +47,7 @@ export const setVisibilityFilter = (filter) => {
 
 //{attribute: name/strength, orderBy: asc/desc}
 export const setSort = (sort) => {
-  return { type: SORT, payload: sort };
+  return { type: SET_SORTER, payload: sort };
 };
 
 export const setPagination = (pagination) => {

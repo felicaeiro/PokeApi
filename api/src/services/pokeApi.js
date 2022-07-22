@@ -32,6 +32,7 @@ getPokemonsFromAPI = async () => {
     id: x.id,
     name: x.name,
     img: x.img,
+    attack: x.attack,
     types: x.types,
   }));
 };

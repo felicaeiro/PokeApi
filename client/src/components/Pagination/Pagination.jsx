@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Pagination = ({ pokesPerPage, totalPokes, paginate }) => {
+const Pagination = ({ pokesPerPage, totalPokes, onPagination }) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalPokes / pokesPerPage); i++) {
@@ -11,10 +11,18 @@ export const Pagination = ({ pokesPerPage, totalPokes, paginate }) => {
       <ul>
         {pageNumbers.map((number) => (
           <li key={number}>
-            <button onClick={() => paginate(number)}>{number}</button>
+            <button
+              onClick={() =>
+                onPagination({ currentPage: number, pokesPerPage: 12 })
+              }
+            >
+              {number}
+            </button>
           </li>
         ))}
       </ul>
     </nav>
   );
 };
+
+export default Pagination;

@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import visibilityFilter from './visibilityFilter';
+import visibility from './visibility';
 import data from './data';
 
 const rootReducer = combineReducers({
   data,
-  visibilityFilter,
+  visibility,
 });
 
 export default rootReducer;
