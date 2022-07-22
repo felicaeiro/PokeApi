@@ -1,5 +1,9 @@
-.loading {
+.loadingGif {
   display: block;
   margin: auto;
   margin-top: 30vh;
+}
+
+.loadingTitle {
+  text-align: center;
 }

@@ -1,26 +1,10 @@
-import { GET_ALL_POKEMONS, LOADING } from '../actions';
+import { combineReducers } from 'redux';
+import visibilityFilter from './visibilityFilter';
+import data from './data';
 
-const initialState = {
-  allPokemon: [],
-  pokemonDetail: [],
-  loading: false,
-};
-const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GET_ALL_POKEMONS:
-      return {
-        ...state,
-        allPokemon: action.payload,
-        loading: false,
-      };
-    case LOADING:
-      return {
-        ...state,
-        loading: true,
-      };
-    default:
-      return state;
-  }
-};
+const rootReducer = combineReducers({
+  data,
+  visibilityFilter,
+});
 
 export default rootReducer;

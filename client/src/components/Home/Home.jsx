@@ -1,41 +1,65 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import s from './Home.module.css';
 import SearchBar from '../SearchBar/SearchBar';
-import { getAllPokemon } from '../../redux/actions';
+import {
+  getAllPokemon,
+  getAllTypes,
+  setPagination,
+  setVisibilityFilter,
+} from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import PokemonCard from '../PokemonCard/PokemonCard';
 import Loading from '../Loading/Loading';
+import { Pagination } from '../Pagination/Pagination';
+// import { Pokemons } from '../Pokemons/Pokemons';
+import VisiblePokemons from '../../containers/VisiblePokemons';
 
 export default function Home() {
-  // const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAllPokemon());
+    dispatch(getAllTypes());
   }, [dispatch]);
-  const allPokemon = useSelector((state) => state.allPokemon);
-  const loading = useSelector((state) => state.loading);
 
+  const {
+    pagination: { currentPage, pokesPerPage },
+    filter,
+    sort: { attribute, orderby },
+  } = useSelector((state) => state.visibilityFilter);
+  const { allPokemon, types, loading } = useSelector((state) => state.data);
+
+  const paginate = (pageNumber) =>
+    dispatch(setPagination({ currentPage: pageNumber, pokesPerPage }));
+
+  const handleSelect = (e) => {
+    if (e.target.name === 'selectType') {
+      dispatch(setVisibilityFilter({ key: 'type', value: e.target.value }));
+    }
+  };
+
+  if (loading) return <Loading />;
   return (
     <div className={`${s.container}`}>
-      {loading ? (
-        <Loading />
-      ) : (
-        ((<SearchBar />),
-        {
-          /* <label>Order By</label>
-      <select></select> */
-        },
-        allPokemon &&
-          allPokemon.map((pokemon) => (
-            <PokemonCard
-              id={pokemon.id}
-              key={pokemon.id}
-              name={pokemon.name}
-              types={pokemon.types}
-              img={pokemon.img}
-            />
-          )))
-      )}
+      <SearchBar />
+
+      <select name="selectType" onChange={(e) => handleSelect(e)}>
+        <option disabled>Filter By Type</option>
+        <option value="all">All Types</option>
+        {types &&
+          types.map((t) => (
+            <option key={t.id} value={t.name}>
+              {t.name}
+            </option>
+          ))}
+      </select>
+
+      <VisiblePokemons />
+
+      <Pagination
+        pokesPerPage={pokesPerPage}
+        totalPokes={allPokemon.length}
+        paginate={paginate}
+      />
     </div>
   );
 }
