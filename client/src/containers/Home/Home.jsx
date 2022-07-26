@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
 import s from './Home.module.css';
-import SearchBar from '../../components/SearchBar/SearchBar';
+import SearchBar from '../SearchBar/SearchBar';
 import {
   getAllPokemon,
   getAllTypes,
   setPagination,
   setSort,
-  setVisibilityFilter,
+  setFilter,
 } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/Loading/Loading';
-import VisiblePokemons from '../VisiblePokemons/VisiblePokemons';
+import VisiblePokemons from '../VisiblePokemons';
 import FilterSelector from '../../components/FilterSelector/FilterSelector';
+import { Error } from '../../components/Error/Error';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -21,12 +22,9 @@ export default function Home() {
     dispatch(getAllTypes());
   }, [dispatch]);
 
-  const {
-    pagination: { currentPage, pokesPerPage },
-    filter,
-    sort: { attribute, orderby },
-  } = useSelector((state) => state.visibility);
-  const { allPokemon, types, loading } = useSelector((state) => state.data);
+  const { allPokemon, types, loading, error } = useSelector(
+    (state) => state.data
+  );
 
   allPokemon.forEach((x) =>
     Number(x.id) ? (x.source = 'api') : (x.source = 'db')
@@ -39,12 +37,12 @@ export default function Home() {
 
   const handleSelectFilter = (name, value) => {
     dispatch(
-      setVisibilityFilter({
+      setFilter({
         key: name,
         value,
       })
     );
-    dispatch(setPagination({ currentPage: 1, pokesPerPage }));
+    dispatch(setPagination({ currentPage: 1, pokesPerPage: 12 }));
   };
 
   const handleSelectSorter = (e) => {
@@ -54,6 +52,9 @@ export default function Home() {
   };
 
   if (loading) return <Loading />;
+
+  if (error) return <Error />;
+
   return (
     <div className={`${s.container}`}>
       <SearchBar />

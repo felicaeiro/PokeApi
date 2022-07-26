@@ -11,7 +11,7 @@ export default function Nav() {
           <img src={home} alt="home" width="50px" className={`${s.logo}`} />
           Home
         </Link>
-        <Link to="create-pokemon">Create your own Pokemon</Link>
+        <Link to="/createPokemon">Create your own Pokemon</Link>
       </div>
     </div>
   );

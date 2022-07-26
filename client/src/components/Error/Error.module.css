@@ -1,0 +1,9 @@
+.errorGif {
+  display: block;
+  margin: auto;
+  margin-top: 20vh;
+}
+
+.errorTitle {
+  text-align: center;
+}

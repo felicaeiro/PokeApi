@@ -1,5 +1,4 @@
 const axios = require('axios');
-const { createTypes } = require('./pokeDb');
 
 const urlPokemon = 'https://pokeapi.co/api/v2/pokemon';
 const urlTypes = 'https://pokeapi.co/api/v2/type';

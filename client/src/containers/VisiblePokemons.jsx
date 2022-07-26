@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import Pokemons from '../../components/Pokemons/Pokemons';
-import { setPagination } from '../../redux/actions';
+import Pokemons from '../components/Pokemons/Pokemons';
+import { setPagination } from '../redux/actions';
 
-const getVisiblePokemons = (pokemons, filters) => {
+const filterPokemons = (pokemons, filters) => {
   const result = pokemons.filter((poke) =>
     filters.every((filter) => {
       if (filter.key === 'types') {
@@ -20,8 +20,6 @@ const getVisiblePokemons = (pokemons, filters) => {
 };
 
 const sortPokemons = (filteredPokemons, sorter) => {
-  if (!sorter.attribute) return filteredPokemons;
-
   return filteredPokemons.sort((a, b) => {
     if (b[sorter.attribute] > a[sorter.attribute]) {
       return sorter.order === 'asc' ? -1 : 1;
@@ -30,18 +28,15 @@ const sortPokemons = (filteredPokemons, sorter) => {
   });
 };
 
-const getPokesPerPage = (filteredPokemons, { currentPage, pokesPerPage }) => {
+const getPokesPerPage = (allPokemon, { currentPage, pokesPerPage }) => {
   const indexOfLastPoke = currentPage * pokesPerPage;
   const indexOfFirstPoke = indexOfLastPoke - pokesPerPage;
-  const pokesToRender = filteredPokemons.slice(
-    indexOfFirstPoke,
-    indexOfLastPoke
-  );
+  const pokesToRender = allPokemon.slice(indexOfFirstPoke, indexOfLastPoke);
   return pokesToRender;
 };
 
 const mapStateToProps = (state) => {
-  let filteredPokemons = getVisiblePokemons(
+  let filteredPokemons = filterPokemons(
     state.data.allPokemon,
     state.visibility.filter
   );
