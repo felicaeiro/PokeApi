@@ -1,4 +1,9 @@
-import { SET_SORTER, SET_PAGINATION, SET_FILTER } from '../constants/index';
+import {
+  SET_SORTER,
+  SET_PAGINATION,
+  SET_FILTER,
+  REMOVE_FILTER,
+} from '../constants/index';
 
 const initialState = {
   filter: [],
@@ -12,8 +17,13 @@ const visibility = (state = initialState, action) => {
       return {
         ...state,
         filter: state.filter
-          .filter((f) => f.key !== action.payload.key)
+          // .filter((f) => f.value !== action.payload.value)
           .concat([action.payload]),
+      };
+    case REMOVE_FILTER:
+      return {
+        ...state,
+        filter: state.filter.filter((f) => f.value !== action.payload.value),
       };
     case SET_PAGINATION: {
       //action.payload = { currentPage: number, pokesPerPage: 12 }

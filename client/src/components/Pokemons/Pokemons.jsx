@@ -2,10 +2,22 @@ import React from 'react';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import card from '../../img/card.png';
 import Pagination from '../Pagination/Pagination';
+import SideBar from '../../containers/SideBar/SideBar';
 
-const Pokemons = ({ pokesToRender, totalPokemons, onPagination }) => {
+const Pokemons = ({
+  pokesToRender,
+  totalPokemons,
+  filteredTypes,
+  filteredSources,
+  onPagination,
+}) => {
   return (
     <div>
+      <SideBar
+        filteredTypes={filteredTypes}
+        filteredSources={filteredSources}
+      />
+
       {pokesToRender.map((p) => (
         <PokemonCard
           id={p.id}

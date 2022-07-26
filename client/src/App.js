@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
 import LandingPage from './components/LandingPage/LandingPage';
 import PokemonDetail from './containers/PokemonDetail/PokemonDetail';
-import CreatePokemon from './components/CreatePokemon/CreatePokemon';
+import CreatePokemon from './containers/CreatePokemon/CreatePokemon';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Home from './containers/Home/Home';
 import PokemonByName from './containers/PokemonByName/PokemonByName';

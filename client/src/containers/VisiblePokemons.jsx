@@ -35,8 +35,33 @@ const getPokesPerPage = (allPokemon, { currentPage, pokesPerPage }) => {
   return pokesToRender;
 };
 
+const filterTypes = (allPokemon, types, filters) => {
+  types.forEach((t) => (t.checked = filters.some((f) => f.value === t.name)));
+  return types.filter((t) => {
+    return allPokemon.some((p) => {
+      return p.types.includes(t.name);
+    });
+  });
+};
+
+const filterSources = (allPokemon, filters) => {
+  const sources = [
+    { name: 'created', source: 'db' },
+    { name: 'existing', source: 'api' },
+  ];
+
+  sources.forEach(
+    (s) => (s.checked = filters.some((f) => f.value === s.source))
+  );
+  return sources.filter((s) => {
+    return allPokemon.some((p) => {
+      return p.source === s.source;
+    });
+  });
+};
+
 const mapStateToProps = (state) => {
-  let filteredPokemons = filterPokemons(
+  const filteredPokemons = filterPokemons(
     state.data.allPokemon,
     state.visibility.filter
   );
@@ -45,7 +70,18 @@ const mapStateToProps = (state) => {
     sortedPokemons,
     state.visibility.pagination
   );
+  const filteredTypes = filterTypes(
+    filteredPokemons,
+    state.data.types,
+    state.visibility.filter
+  );
+  const filteredSources = filterSources(
+    filteredPokemons,
+    state.visibility.filter
+  );
   return {
+    filteredTypes,
+    filteredSources,
     pokesToRender,
     totalPokemons: filteredPokemons.length,
   };

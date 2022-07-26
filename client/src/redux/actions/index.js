@@ -9,6 +9,7 @@ import {
   SET_SORTER,
   LOADING,
   HANDLE_ERROR,
+  REMOVE_FILTER,
 } from '../constants/index';
 
 export const handleError = (error) => {
@@ -76,6 +77,10 @@ export const createPokemon = (data) => {
     dispatch(loading());
     fetch('http://localhost:3001/pokemons', {
       method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(data),
     })
       .then((response) => {
@@ -154,6 +159,10 @@ export const getPokemonDetail = (idPokemon) => {
 
 export const setFilter = (filter) => {
   return { type: SET_FILTER, payload: filter };
+};
+
+export const removeFilter = (filter) => {
+  return { type: REMOVE_FILTER, payload: filter };
 };
 
 //{attribute: name/strength, orderBy: asc/desc}

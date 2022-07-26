@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import card from '../../img/card.png';
 import Loading from '../../components/Loading/Loading';
 import { getPokemonDetail } from '../../redux/actions';
 import './PokemonDetail.module.css';
@@ -20,7 +21,7 @@ export default function PokemonDetail({ match }) {
       {poke.id && (
         <div>
           <h1>{poke.name.charAt(0).toUpperCase() + poke.name.substring(1)}</h1>
-          <img src={poke.img} alt="pokemon" />
+          <img src={poke.img ? poke.img : card} alt="pokemon" height="300px" />
           <p>HP: {poke.hp}</p>
           <p>Types:</p>
           <ul>

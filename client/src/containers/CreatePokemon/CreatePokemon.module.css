@@ -1,4 +1,4 @@
-.container {
+/* .container {
   max-width: 1000px;
   margin: auto;
   text-align: center;
@@ -19,7 +19,7 @@
   border: 1px solid #ff0000;
   border-radius: 8px;
   /* transition: background 450ms ease-in; */
-}
+/* }
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -34,4 +34,14 @@
   cursor: pointer;
   overflow: visible;
   position: relative;
+}  */
+label.danger {
+  color: red;
+}
+input.danger {
+  border: 1px solid red;
+}
+span.danger {
+  color: red;
+  font-size: 10px;
 }

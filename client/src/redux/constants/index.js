@@ -4,6 +4,7 @@ export const GET_POKEMON_DETAIL = 'GET_POKEMON_DETAIL';
 export const CREATE_POKEMON = 'CREATE_POKEMON';
 export const SEARCH_BY_NAME = 'SEARCH_BY_NAME';
 export const SET_FILTER = 'SET_FILTER';
+export const REMOVE_FILTER = 'REMOVE_FILTER';
 export const SET_SORTER = 'SET_SORTER';
 export const SET_PAGINATION = 'SET_PAGINATION';
 export const LOADING = 'LOADING';

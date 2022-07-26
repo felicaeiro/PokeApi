@@ -42,7 +42,7 @@ getPokemonByIdFromDb = async (id) => {
 createPokemon = async (pokemonCreate) => {
   let { name, types, hp, attack, defense, speed, height, weight } =
     pokemonCreate;
-
+  console.log(pokemonCreate);
   if (
     !name ||
     !types ||
