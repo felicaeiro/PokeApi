@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+.pagination {
+  margin-left: 12%;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination .page {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: #3e3e3e;
+  padding: 8px 18px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.pagination .activePage {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: white;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 50%;
+  background-color: #3e3e3e;
+  cursor: pointer;
+}
+
+.pagination .page:hover {
+  background-color: #ddd;
+  border-radius: 50%;
+}

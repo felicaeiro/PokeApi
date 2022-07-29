@@ -35,6 +35,12 @@
   overflow: visible;
   position: relative;
 }  */
+.container {
+  margin-top: 50px;
+  max-width: 1000px;
+  margin: 100px auto;
+  text-align: center;
+}
 label.danger {
   color: red;
 }

@@ -1,12 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-
-.loadingGif {
-  display: block;
-  margin: auto;
-  margin-top: 40vh;
-}
-
-.loadingTitle {
-  text-align: center;
+.container {
+  max-width: 75%;
+  margin: 90px auto;
   font-family: 'Poppins', sans-serif;
 }

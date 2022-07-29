@@ -4,8 +4,8 @@ import s from './LandingPage.module.css';
 
 export default function LandingPage() {
   return (
-    <div className={`${s.container}`}>
-      <div className={`${s.button}`}>
+    <div className={s.container}>
+      <div className={s.button}>
         <Link to="/home">
           <button>Discover Pokes</button>
         </Link>

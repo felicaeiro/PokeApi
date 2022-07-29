@@ -1,28 +1,37 @@
 .navBar {
-  background-color: rgb(162, 3, 3);
+  background-color: #262626;
+  position: fixed;
+  top: 0px;
+  width: 100vw;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  z-index: 2;
 }
+
+.pokelogo {
+  margin-left: 20%;
+}
+
 .container {
-  max-width: 1000px;
-  margin: auto;
+  margin-left: 3rem;
   display: flex;
   align-items: center;
   justify-content: space-around;
   height: 4rem;
 }
-.home {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.logo {
-  transition: 1.5s;
-}
-
-.logo:hover {
-  transform: rotate(720deg);
-}
-
-a {
+.navLink {
   text-decoration: none;
+  margin: 0 2rem;
+  color: rgba(255, 255, 255, 0.631);
+  transition: color 0.3s;
+}
+
+.navLink:hover {
+  color: white;
+}
+
+.selected {
+  color: white;
 }

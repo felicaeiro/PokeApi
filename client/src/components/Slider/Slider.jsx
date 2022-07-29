@@ -5,9 +5,15 @@ export const Slider = ({ name, value, min, max, handleChange }) => {
   return (
     <div>
       <label>{name.charAt(0).toUpperCase() + name.substring(1)}</label>
-      <div>{value}</div>
+      {/* <div>{value}</div> */}
       <input
-        className={`${s.slider}`}
+        type="number"
+        name={name}
+        value={value}
+        onChange={(e) => handleChange(e)}
+      />
+      <input
+        className={s.slider}
         type="range"
         min={min}
         max={max}
@@ -15,7 +21,8 @@ export const Slider = ({ name, value, min, max, handleChange }) => {
         value={value}
         onChange={(e) => handleChange(e)}
       />
-      <div className={`${s.minmax}`}>
+
+      <div className={s.minmax}>
         <span>{min}</span>
         <span>{max}</span>
       </div>

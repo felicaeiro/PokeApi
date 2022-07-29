@@ -27,25 +27,52 @@ export default function CreatePokemon() {
     types: [],
   });
 
-  const validate = (values) => {
-    let notValid = {};
-    if (!values.name) notValid.name = 'A name is required';
-    if (values.name.length > 10)
-      notValid.name = `The name can't have more than 10 letters`;
-    if (!/^[A-Z]+$/gim.test(values.name))
-      notValid.name = 'The name can only have letters';
-    if (allPokemon.some((p) => p.name === values.name))
-      notValid.name = `There's already a Pokémon with that name`;
-    if (!values.types.length) notValid.types = 'Please select a type';
-    return notValid;
+  const validate = () => {
+    let formIsValid = true;
+    if (!/^[A-Z]+$/gim.test(values.name)) {
+      setNotValid((prev) => ({
+        ...prev,
+        name: 'The name can only have letters.',
+      }));
+      formIsValid = false;
+    }
+    if (values.name.length > 10 || values.name.length < 3) {
+      setNotValid((prev) => ({
+        ...prev,
+        name: `The name should be 3-10 characters.`,
+      }));
+      formIsValid = false;
+    }
+    if (allPokemon.some((p) => p.name === values.name)) {
+      setNotValid((prev) => ({
+        ...prev,
+        name: `There's already a Pokémon with that name`,
+      }));
+      formIsValid = false;
+    }
+    if (!values.types.length) {
+      setNotValid((prev) => ({ ...prev, types: 'Please select a type' }));
+      formIsValid = false;
+    }
+    return formIsValid;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setNotValid(validate({ ...values, [e.target.name]: e.target.value }));
-    if (Object.keys(notValid).length === 0) {
+    if (validate()) {
       dispatch(createPokemon(values));
-      window.alert(
+      setNotValid({});
+      setValues({
+        name: '',
+        hp: 1,
+        attack: 1,
+        defense: 1,
+        speed: 1,
+        height: 1,
+        weight: 1,
+        types: [],
+      });
+      alert(
         values.name.charAt(0).toUpperCase() +
           values.name.substring(1) +
           ' created successfully!'
@@ -65,7 +92,7 @@ export default function CreatePokemon() {
         e.preventDefault();
         setNotValid({
           ...notValid,
-          types: 'You can only select up to two types',
+          types: 'You can only select up to two types.',
         });
         e.currentTarget.checked = false;
       }
@@ -85,7 +112,7 @@ export default function CreatePokemon() {
   if (loading) return <Loading />;
 
   return (
-    <div>
+    <div className={s.container}>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name: </label>
@@ -93,6 +120,7 @@ export default function CreatePokemon() {
             className={notValid.name && s.danger}
             type="text"
             name="name"
+            autoComplete="off"
             value={values.name}
             onChange={handleChange}
           />

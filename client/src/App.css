@@ -1,1 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #3e3e3e;
+}
+
+:root {
+  --normal: #9ca071;
+  --fighting: #ad2f29;
+  --phsychic: #df4f7c;
+  --dragon: #595091;
+  --water: #6781b3;
+  --fairy: #e591a0;
+  --ice: #94d1cb;
+  --flying: #9688b5;
+  --ghost: #645085;
+  --fire: #e17733;
+  --steel: #b0b1c3;
+  --grass: #71b951;
+  --ground: #d6b965;
+  --rock: #ad9a3c;
+  --dark: #625041;
+  --electric: #f2cd3c;
+  --poison: #8e3e87;
+  --bug: #9eb039;
+  --shadow: #5b5366;
+  --unknown: #3e3a39;
+}

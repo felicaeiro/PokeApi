@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import s from './PokemonByName.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import card from '../../img/card.png';
@@ -19,7 +20,7 @@ export default function PokemonByName({ match }) {
   if (loading) return <Loading />;
 
   return (
-    <div>
+    <div className={s.container}>
       <SearchBar />
 
       {search.name && (

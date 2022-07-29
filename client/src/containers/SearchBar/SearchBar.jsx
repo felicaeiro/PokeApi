@@ -19,7 +19,9 @@ export default function SearchBar() {
     e.preventDefault();
     if (poke === '') setNotValid('A Pokemon name is required');
     else {
-      const searchedPoke = allPokemon.filter((p) => p.name === poke);
+      const searchedPoke = allPokemon.filter(
+        (p) => p.name === poke.toLowerCase()
+      );
       if (searchedPoke.length) {
         history.push(`/home/search/${poke}`);
       } else setNotValid(`The Pokemon ${poke} doesn't exist`);
@@ -27,17 +29,23 @@ export default function SearchBar() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={poke}
-        onChange={handleChange}
-        placeholder="Enter Pokemon name..."
-        className={notValid && s.danger}
-      />
+    <div className={s.searchWrapper}>
+      <form
+        className={(notValid && s.dangerBorder) || s.inputHolder}
+        onSubmit={handleSubmit}
+      >
+        <input
+          type="text"
+          value={poke}
+          onChange={handleChange}
+          placeholder="Enter Pokemon name..."
+          className={`${s.input} `}
+        />
+        <button type="submit" className={s.searchIcon}>
+          <i className="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
       {notValid && <span className={`${s.danger}`}>{notValid}</span>}
-      <br />
-      <input type="submit" value="Search Pokemon" />
-    </form>
+    </div>
   );
 }

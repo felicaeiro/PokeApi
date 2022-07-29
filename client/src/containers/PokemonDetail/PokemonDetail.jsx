@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import card from '../../img/card.png';
 import Loading from '../../components/Loading/Loading';
 import { getPokemonDetail } from '../../redux/actions';
-import './PokemonDetail.module.css';
+import s from './PokemonDetail.module.css';
 
 export default function PokemonDetail({ match }) {
   const { idPokemon } = match.params;
@@ -17,7 +17,7 @@ export default function PokemonDetail({ match }) {
 
   if (loading) return <Loading />;
   return (
-    <div>
+    <div className={s.container}>
       {poke.id && (
         <div>
           <h1>{poke.name.charAt(0).toUpperCase() + poke.name.substring(1)}</h1>

@@ -1,6 +1,118 @@
 .container {
-  border: 1px solid;
+  min-width: 550px;
+  max-width: 550px;
+  width: 550px;
+  max-height: 230px;
+  min-height: 230px;
+  margin: 1.5rem auto;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  border-radius: 20px;
   display: flex;
-  max-width: 1000px;
-  margin: auto;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  transition: box-shadow 0.3s;
+}
+
+.container:hover {
+  background-color: rgb(214, 212, 212);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+.pokeImage {
+  transition: height 0.3s;
+  position: absolute;
+}
+.container:hover .pokeImage {
+  height: 245px;
+}
+
+.content {
+  padding: 1.5rem;
+  flex: 1;
+  overflow: hidden;
+  margin-left: 225px;
+}
+.title {
+  font-size: 2.5rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.type {
+  font-size: 1.2rem;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+}
+.type img {
+  padding: 0.3rem;
+}
+ul {
+  list-style-type: none;
+}
+.button {
+  margin-left: 150px;
+}
+
+.normal {
+  color: var(--normal);
+}
+.fighting {
+  color: var(--fighting);
+}
+.phsychic {
+  color: var(--phsychic);
+}
+.dragon {
+  color: var(--dragon);
+}
+.water {
+  color: var(--water);
+}
+.fairy {
+  color: var(--fairy);
+}
+.ice {
+  color: var(--ice);
+}
+.flying {
+  color: var(--flying);
+}
+.ghost {
+  color: var(--ghost);
+}
+.fire {
+  color: var(--fire);
+}
+.steel {
+  color: var(--steel);
+}
+.grass {
+  color: var(--grass);
+}
+.ground {
+  color: var(--ground);
+}
+.rock {
+  color: var(--rock);
+}
+.dark {
+  color: var(--dark);
+}
+.electric {
+  color: var(--electric);
+}
+.poison {
+  color: var(--poison);
+}
+.bug {
+  color: var(--bug);
+}
+.shadow {
+  color: var(--shadow);
+}
+.unknown {
+  color: var(--unknown);
 }

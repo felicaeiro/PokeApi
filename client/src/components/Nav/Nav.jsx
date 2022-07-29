@@ -1,17 +1,29 @@
 import React from 'react';
 import s from './Nav.module.css';
-import { Link } from 'react-router-dom';
-import home from '../../img/pokeball.png';
+import { NavLink } from 'react-router-dom';
+import pokemon from '../../img/pokemonnav.png';
 
 export default function Nav() {
   return (
-    <div className={`${s.navBar}`}>
-      <div className={`${s.container}`}>
-        <Link to="/home" className={`${s.home}`}>
-          <img src={home} alt="home" width="50px" className={`${s.logo}`} />
+    <div className={s.navBar}>
+      <NavLink to="/home" className={s.pokelogo}>
+        <img src={pokemon} alt="pokemon" height="60px" />
+      </NavLink>
+      <div className={s.container}>
+        <NavLink
+          activeClassName={s.selected}
+          className={`${s.navLink} ${s.home}`}
+          to="/home"
+        >
           Home
-        </Link>
-        <Link to="/createPokemon">Create your own Pokemon</Link>
+        </NavLink>
+        <NavLink
+          activeClassName={s.selected}
+          className={s.navLink}
+          to="/createPokemon"
+        >
+          Create
+        </NavLink>
       </div>
     </div>
   );

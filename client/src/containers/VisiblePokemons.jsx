@@ -84,6 +84,7 @@ const mapStateToProps = (state) => {
     filteredSources,
     pokesToRender,
     totalPokemons: filteredPokemons.length,
+    currentPage: state.visibility.pagination.currentPage,
   };
 };
 

@@ -33,19 +33,24 @@ export default function Home() {
 
   return (
     <div className={s.container}>
-      <SearchBar />
+      <div className={s.topBar}>
+        <SearchBar />
 
-      <div>
-        <h4>Sort By: </h4>
-        <select name={'sorter'} onChange={(e) => handleSelectSorter(e)}>
-          <option label="Default" value={'id asc'} />
-          <option label="A - Z" value={'name asc'} />
-          <option label="Z - A" value={'name desc'} />
-          <option label="Lowest Attack" value={'attack asc'} />
-          <option label="Highest Attack" value={'attack desc'} />
-        </select>
+        <div className={s.sorter}>
+          <h4>Sort By: </h4>
+          <select
+            className={s.select}
+            name={'sorter'}
+            onChange={(e) => handleSelectSorter(e)}
+          >
+            <option label="Default" value={'id asc'} />
+            <option label="A - Z" value={'name asc'} />
+            <option label="Z - A" value={'name desc'} />
+            <option label="Lowest Attack" value={'attack asc'} />
+            <option label="Highest Attack" value={'attack desc'} />
+          </select>
+        </div>
       </div>
-
       <VisiblePokemons />
     </div>
   );

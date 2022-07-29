@@ -1,8 +1,40 @@
+.searchWrapper {
+  display: flex;
+  align-items: center;
+}
+.inputHolder {
+  width: 240px;
+  border: 2px solid #3e3e3e;
+  padding: 10px 30px;
+  margin: 0 1rem;
+  border-radius: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.input,
+.searchIcon {
+  border: none;
+  background-color: transparent;
+  font-size: 15px;
+  color: #3e3e3e;
+  outline: none;
+}
+.searchIcon {
+  cursor: pointer;
+}
+
 span.danger {
   color: red;
   font-size: 10px;
 }
 
-input.danger {
+.dangerBorder {
+  width: 240px;
   border: 2px solid red;
+  padding: 10px 30px;
+  margin: 1rem;
+  border-radius: 50px;
+  display: flex;
+  justify-content: space-between;
 }
