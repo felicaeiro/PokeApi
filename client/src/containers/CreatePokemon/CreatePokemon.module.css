@@ -3,7 +3,7 @@
   margin: 130px auto 0;
   box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
   border-radius: 20px;
-  height: 820px;
+  height: max-content;
 }
 .title {
   margin: 0;
@@ -32,24 +32,24 @@
 }
 .content .nameInput input,
 textarea {
-  width: 75%;
+  width: 82%;
 }
 
 .heightWeight {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
+  padding-right: 35px;
 }
 .heightWeight input,
 textarea {
   width: 60px;
 }
-.heightInput {
-  margin-right: 225px;
-}
 
 .stats {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
@@ -66,8 +66,9 @@ textarea {
 }
 
 .button {
-  margin: 30px auto 0;
+  margin: 25px auto 0;
   max-width: max-content;
+  padding-bottom: 20px;
 }
 
 .button button {
@@ -113,21 +114,24 @@ span.danger {
   color: #c80000;
   font-size: 12px;
 }
-
-.alert {
+.alertName {
+  min-height: 30px;
+  text-align: center;
+}
+.alertHeightWeight {
   min-height: 30px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .alertSliders {
-  min-height: 40px;
+  min-height: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   text-align: center;
 }
 .alertSliders span {
-  max-width: 220px;
-  width: 218px;
+  width: 130px;
+  line-height: 13px;
 }

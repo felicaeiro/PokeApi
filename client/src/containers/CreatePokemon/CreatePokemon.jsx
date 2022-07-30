@@ -82,7 +82,7 @@ export default function CreatePokemon() {
     ) {
       setNotValid((prev) => ({
         ...prev,
-        attack: `Special Attack should be between 1 and 200`,
+        specialAttack: `Special Attack should be between 1 and 200`,
       }));
       formIsValid = false;
     }
@@ -104,7 +104,7 @@ export default function CreatePokemon() {
     ) {
       setNotValid((prev) => ({
         ...prev,
-        defense: `Special Defense should be between 1 and 255`,
+        specialDefense: `Special Defense should be between 1 and 255`,
       }));
       formIsValid = false;
     }
@@ -228,11 +228,11 @@ export default function CreatePokemon() {
             onChange={handleChange}
           />
         </div>
-        <div className={s.alert}>
+        <div className={s.alertName}>
           {notValid.name && <span className={s.danger}> {notValid.name}</span>}
         </div>
         <div className={s.heightWeight}>
-          <div className={s.heightInput}>
+          <div>
             <label className={s.formLabel}>Height: </label>
             <input
               className={(notValid.height && s.dangerInput) || s.input}
@@ -245,7 +245,7 @@ export default function CreatePokemon() {
             <span> cm.</span>
           </div>
 
-          <div className={s.weightInput}>
+          <div>
             <label className={s.formLabel}>Weight: </label>
             <input
               className={(notValid.weight && s.dangerInput) || s.input}
@@ -258,7 +258,7 @@ export default function CreatePokemon() {
             <span> kg.</span>
           </div>
         </div>
-        <div className={s.alert}>
+        <div className={s.alertHeightWeight}>
           <span className={s.danger}>
             {notValid.height && <span> {notValid.height}</span>}
           </span>
@@ -334,8 +334,18 @@ export default function CreatePokemon() {
             )}
           </span>
           <span>
+            {notValid.specialAttack && (
+              <span className={s.danger}> {notValid.specialAttack}</span>
+            )}
+          </span>
+          <span>
             {notValid.defense && (
               <span className={s.danger}> {notValid.defense}</span>
+            )}
+          </span>
+          <span>
+            {notValid.specialDefense && (
+              <span className={s.danger}> {notValid.specialDefense}</span>
             )}
           </span>
           <span>
