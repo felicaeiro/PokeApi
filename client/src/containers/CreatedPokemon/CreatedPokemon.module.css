@@ -1,31 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-.container {
-  max-width: 75%;
-  margin: 90px auto;
-}
-
-.search {
-  padding-top: 4px;
-  min-height: 59px;
-  display: flex;
-  align-items: center;
-  margin-bottom: 34px;
-}
-
 .button {
   margin: auto;
   max-width: max-content;
-  padding-top: 2rem;
+  display: flex;
 }
 
 .button button {
   width: 9rem;
-  height: 2.5rem;
+  height: 3.5rem;
   color: #3e3e3e;
   font-family: 'Poppins', sans-serif;
   border: 2px solid rgb(62, 62, 62);
   border-radius: 50px;
   transition: 0.3s;
+  margin: 10px;
 }
 
 .button button:hover {
@@ -42,9 +29,9 @@
   border: 2px solid var(--fighting);
   color: white;
 }
-.phsychic button:hover {
-  background-color: var(--phsychic);
-  border: 2px solid var(--phsychic);
+.psychic button:hover {
+  background-color: var(--psychic);
+  border: 2px solid var(--psychic);
 }
 .dragon button:hover {
   background-color: var(--dragon);

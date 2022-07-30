@@ -23,7 +23,6 @@ export const getAllPokemon = () => {
       .then((response) => {
         if (!response.ok) {
           response
-            .text()
             .then((error) => dispatch(handleError(error)))
             .catch(
               (error) =>
@@ -51,7 +50,6 @@ export const getAllTypes = () => {
       .then((response) => {
         if (!response.ok) {
           response
-            .text()
             .then((error) => dispatch(handleError(error)))
             .catch(
               (error) =>
@@ -85,7 +83,12 @@ export const createPokemon = (data) => {
     })
       .then((response) => {
         if (!response.ok) {
-          response.text().then((error) => dispatch(handleError(error)));
+          response
+            .then((error) => dispatch(handleError(error)))
+            .catch(
+              (error) =>
+                new Error(`${response.status} ${response.statusText}: ${error}`)
+            );
         } else {
           response
             .json()
@@ -108,7 +111,6 @@ export const getPokeByName = (name) => {
       .then((response) => {
         if (!response.ok) {
           response
-            .text()
             .then((error) => dispatch(handleError(error)))
             .catch(
               (error) =>
@@ -136,7 +138,6 @@ export const getPokemonDetail = (idPokemon) => {
       .then((response) => {
         if (!response.ok) {
           response
-            .text()
             .then((error) => dispatch(handleError(error)))
             .catch(
               (error) =>

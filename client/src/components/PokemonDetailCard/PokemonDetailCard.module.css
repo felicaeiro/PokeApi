@@ -1,0 +1,72 @@
+.container {
+  max-width: 1000px;
+  margin: 130px auto 50px;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  border-radius: 20px;
+  height: 615px;
+}
+.topInfo {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem 10rem;
+  justify-content: space-evenly;
+}
+
+.nameTypes {
+  margin-left: 90px;
+}
+.title {
+  font-size: 3rem;
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+.typesList {
+  display: flex;
+  margin-top: 0;
+}
+
+.type {
+  font-size: 1.2rem;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+}
+.type img {
+  margin-left: 20px;
+  margin-right: 3px;
+}
+
+.heightWeight {
+  display: flex;
+  margin-top: 60px;
+}
+.heightWeight div {
+  text-align: center;
+  margin-right: 50px;
+}
+.heightWeight p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.statsRanges {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 80px auto;
+  width: 50%;
+  text-align: center;
+}
+
+.statsRanges input[type='range'] {
+  -webkit-appearance: none;
+  border-radius: 3px;
+  width: 160%;
+  height: 40px;
+  transform: rotate(270deg);
+}
+
+.statsRanges input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+}

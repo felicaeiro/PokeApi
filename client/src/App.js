@@ -11,7 +11,7 @@ import PokemonByName from './containers/PokemonByName/PokemonByName';
 function App() {
   return (
     <>
-      <Route path="/(home|pokemonDetail|createPokemon)/" component={Nav} />
+      <Nav />
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/home" component={Home} />

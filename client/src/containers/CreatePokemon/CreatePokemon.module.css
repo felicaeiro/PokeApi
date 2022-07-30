@@ -1,53 +1,133 @@
-/* .container {
-  max-width: 1000px;
-  margin: auto;
-  text-align: center;
-}
-
-.slider {
-  -webkit-appearance: none;
-  width: 300px;
-  height: 5px;
-  background: linear-gradient(
-    to right,
-    #82cfd0 0%,
-    #82cfd0 50%,
-    transparent 50%,
-    transparent 100%
-  );
-  outline: none;
-  border: 1px solid #ff0000;
-  border-radius: 8px;
-  /* transition: background 450ms ease-in; */
-/* }
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 40px;
-  height: 40px;
-  border: 0;
-  background-image: url('../../img/rangethumb.png');
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  overflow: visible;
-  position: relative;
-}  */
 .container {
-  margin-top: 50px;
   max-width: 1000px;
-  margin: 100px auto;
+  margin: 130px auto 0;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  border-radius: 20px;
+  height: 820px;
+}
+.title {
+  margin: 0;
+  padding: 2rem;
+  color: #c80000;
+}
+.content {
+  padding: 0 4rem;
+  font-size: 1.3rem;
+}
+
+.formLabel {
+  margin-right: 10px;
+  font-weight: bold;
+  cursor: auto;
+}
+.content .input {
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #3e3e3e;
+  border-radius: 5px;
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+  margin: 0.6rem 0.3rem;
+  border: 1px solid #3e3e3e;
+  outline: none;
+}
+.content .nameInput input,
+textarea {
+  width: 75%;
+}
+
+.heightWeight {
+  display: flex;
+  align-items: center;
+}
+.heightWeight input,
+textarea {
+  width: 60px;
+}
+.heightInput {
+  margin-right: 225px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.types {
+  padding: 15px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.checkLabel {
+  padding: 0 7px;
+  display: flex;
+  align-items: center;
+  width: 160px;
+}
+
+.button {
+  margin: 30px auto 0;
+  max-width: max-content;
+}
+
+.button button {
+  margin: auto;
+  width: 15rem;
+  height: 4rem;
+  font-size: 1rem;
+  font-weight: bolder;
+  background-color: transparent;
+  font-family: 'Poppins', sans-serif;
+  color: #3e3e3e;
+  padding: 10px 30px;
+  border: 1px solid black;
+  border-radius: 50px;
+  transition: 0.3s;
+}
+
+.button button:hover {
+  background-color: rgba(2, 2, 2, 0.8);
+  color: rgb(236, 69, 69);
+  cursor: pointer;
+}
+
+label.danger {
+  color: #c80000;
+  margin-right: 10px;
+  font-weight: bold;
+  cursor: auto;
+}
+
+.dangerInput {
+  border: 1px solid #c80000;
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #c80000;
+  border-radius: 5px;
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+  margin: 0.6rem 0.3rem;
+  outline: none;
+}
+
+span.danger {
+  color: #c80000;
+  font-size: 12px;
+}
+
+.alert {
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.alertSliders {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   text-align: center;
 }
-label.danger {
-  color: red;
-}
-input.danger {
-  border: 1px solid red;
-}
-span.danger {
-  color: red;
-  font-size: 10px;
+.alertSliders span {
+  max-width: 220px;
+  width: 218px;
 }

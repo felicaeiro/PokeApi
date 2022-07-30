@@ -1,7 +1,7 @@
 import React from 'react';
-import s from './Selector.module.css';
+import s from './SelectFilter.module.css';
 
-const Selector = ({ name, handleSelect, options }) => {
+const SelectFilter = ({ name, handleSelect, options }) => {
   // if (options.length === 1) return <></>;
   return (
     <div className={s.container}>
@@ -22,4 +22,4 @@ const Selector = ({ name, handleSelect, options }) => {
     </div>
   );
 };
-export default Selector;
+export default SelectFilter;

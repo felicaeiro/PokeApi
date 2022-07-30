@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import card from '../../img/card.png';
+// import card from '../../img/card.png';
 import Loading from '../../components/Loading/Loading';
+import { Error } from '../../components/Error/Error';
 import { getPokemonDetail } from '../../redux/actions';
 import s from './PokemonDetail.module.css';
+import { Link } from 'react-router-dom';
+import PokemonDetailCard from '../../components/PokemonDetailCard/PokemonDetailCard';
 
 export default function PokemonDetail({ match }) {
   const { idPokemon } = match.params;
@@ -13,29 +16,37 @@ export default function PokemonDetail({ match }) {
     dispatch(getPokemonDetail(idPokemon));
   }, [dispatch, idPokemon]);
 
-  const { pokemonDetail: poke, loading } = useSelector((state) => state.data);
+  const {
+    pokemonDetail: poke,
+    loading,
+    error,
+  } = useSelector((state) => state.data);
 
   if (loading) return <Loading />;
+  if (error) return <Error />;
+
   return (
-    <div className={s.container}>
+    <div>
       {poke.id && (
-        <div>
-          <h1>{poke.name.charAt(0).toUpperCase() + poke.name.substring(1)}</h1>
-          <img src={poke.img ? poke.img : card} alt="pokemon" height="300px" />
-          <p>HP: {poke.hp}</p>
-          <p>Types:</p>
-          <ul>
-            {poke.types.map((t, i) => (
-              <li key={i}>{t.charAt(0).toUpperCase() + t.substring(1)}</li>
-            ))}
-          </ul>
-          <p>Atack: {poke.attack}</p>
-          <p>Defense: {poke.defense}</p>
-          <p>Speed: {poke.speed}</p>
-          <p>Weight: {poke.weight}</p>
-          <p>Height: {poke.height}</p>
-        </div>
+        <PokemonDetailCard
+          name={poke.name}
+          types={poke.types}
+          weight={poke.weight}
+          height={poke.height}
+          hp={poke.hp}
+          attack={poke.attack}
+          specialAttack={poke.specialAttack}
+          defense={poke.defense}
+          specialDefense={poke.specialDefense}
+          speed={poke.speed}
+          img={poke.img}
+        />
       )}
+      <div className={`${s.button} ${poke.id && s[poke.types[0]]}`}>
+        <Link to="/home">
+          <button>Return Home</button>
+        </Link>
+      </div>
     </div>
   );
 }

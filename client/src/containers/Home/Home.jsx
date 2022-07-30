@@ -28,7 +28,6 @@ export default function Home() {
   };
 
   if (loading) return <Loading />;
-
   if (error) return <Error />;
 
   return (

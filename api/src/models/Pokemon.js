@@ -30,10 +30,24 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         validate: {
           min: 1,
-          max: 255,
+          max: 200,
+        },
+      },
+      specialAttack: {
+        type: DataTypes.INTEGER,
+        validate: {
+          min: 1,
+          max: 200,
         },
       },
       defense: {
+        type: DataTypes.INTEGER,
+        validate: {
+          min: 1,
+          max: 255,
+        },
+      },
+      specialDefense: {
         type: DataTypes.INTEGER,
         validate: {
           min: 1,
@@ -44,21 +58,21 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         validate: {
           min: 1,
-          max: 255,
+          max: 200,
         },
       },
       height: {
         type: DataTypes.INTEGER,
         validate: {
           min: 1,
-          max: 200,
+          max: 2000,
         },
       },
       weight: {
         type: DataTypes.INTEGER,
         validate: {
           min: 1,
-          max: 1000,
+          max: 100,
         },
       },
     },

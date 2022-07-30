@@ -13,6 +13,7 @@ export default function SearchBar() {
 
   const handleChange = (e) => {
     setPoke(e.target.value);
+    setNotValid('');
   };
 
   const handleSubmit = (e) => {

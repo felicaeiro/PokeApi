@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
 .container {
   width: 100vw;
   height: 100vh;
@@ -19,9 +21,9 @@
   height: 4rem;
   font-size: 1rem;
   font-weight: bolder;
-  font-family: 'Inter', sans-serif;
   background-color: transparent;
-  color: black;
+  font-family: 'Poppins', sans-serif;
+  color: #3e3e3e;
   padding: 10px 30px;
   border: 1px solid black;
   border-radius: 50px;

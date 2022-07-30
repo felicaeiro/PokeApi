@@ -4,11 +4,33 @@ body {
   font-family: 'Poppins', sans-serif;
   color: #3e3e3e;
 }
-
+input:checked::before {
+  content: '\2714';
+  font-size: 1em;
+  color: #fff;
+  position: absolute;
+  right: 1.5px;
+  top: -2px;
+}
+input[type='checkbox'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.3em;
+  height: 1.3em;
+  border-radius: 0.15em;
+  margin-right: 0.5em;
+  border: 1.5px solid #3e3e3e;
+  outline: none;
+  cursor: pointer;
+}
+input:checked {
+  background-color: #3e3e3e;
+  position: relative;
+}
 :root {
   --normal: #9ca071;
   --fighting: #ad2f29;
-  --phsychic: #df4f7c;
+  --psychic: #df4f7c;
   --dragon: #595091;
   --water: #6781b3;
   --fairy: #e591a0;

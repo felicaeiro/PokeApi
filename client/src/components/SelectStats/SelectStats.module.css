@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 130px;
+  text-align: center;
+}
+.sliderLabel {
+  margin-bottom: -6px;
+  font-weight: bold;
+  cursor: auto;
+}
+.input {
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #3e3e3e;
+  border-radius: 5px;
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+  margin: 0.6rem 0.3rem;
+  border: 1px solid #3e3e3e;
+  outline: none;
+}
+.danger {
+  border: 1px solid #c80000;
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #c80000;
+  border-radius: 5px;
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+  margin: 0.6rem 0.3rem;
+  outline: none;
+}
+.container input[type='text'],
+textarea {
+  width: 60px;
+  text-align: center;
+}
+
+.container input[type='range'] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 20px;
+  border-radius: 6px;
+  outline: 0;
+  background: #ccc;
+}
+
+.container input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background-image: url('../../img/rangethumb.png');
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.minmax {
+  font-size: 1rem;
+}
+.min {
+  margin-right: 100px;
+  margin-left: 5px;
+}

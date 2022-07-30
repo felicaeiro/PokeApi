@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { removeFilter, setFilter, setPagination } from '../../redux/actions';
-import Selector from '../../components/Selector/Selector';
+import SelectFilter from '../../components/SelectFilter/SelectFilter';
 
 const SideBar = ({ filteredTypes, filteredSources }) => {
   const dispatch = useDispatch();
@@ -19,12 +19,12 @@ const SideBar = ({ filteredTypes, filteredSources }) => {
 
   return (
     <div>
-      <Selector
+      <SelectFilter
         name="types"
         handleSelect={handleSelectFilter}
         options={filteredTypes}
       />
-      <Selector
+      <SelectFilter
         name="source"
         handleSelect={handleSelectFilter}
         options={filteredSources}

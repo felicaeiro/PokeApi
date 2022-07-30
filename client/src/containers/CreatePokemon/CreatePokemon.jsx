@@ -3,8 +3,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPokemon, getAllPokemon, getAllTypes } from '../../redux/actions';
 import s from './CreatePokemon.module.css';
-import { Slider } from '../../components/Slider/Slider';
+import SelectStats from '../../components/SelectStats/SelectStats';
 import Loading from '../../components/Loading/Loading';
+import { Error } from '../../components/Error/Error';
+import CreatedPokemon from '../CreatedPokemon/CreatedPokemon';
 
 export default function CreatePokemon() {
   const dispatch = useDispatch();
@@ -13,14 +15,19 @@ export default function CreatePokemon() {
     dispatch(getAllTypes());
   }, [dispatch]);
 
-  const { allPokemon, types, loading } = useSelector((state) => state.data);
+  const { allPokemon, types, loading, error } = useSelector(
+    (state) => state.data
+  );
 
   const [notValid, setNotValid] = useState({});
+  const [success, setSuccess] = useState(false);
   const [values, setValues] = useState({
     name: '',
     hp: 1,
     attack: 1,
+    specialAttack: 1,
     defense: 1,
+    specialDefense: 1,
     speed: 1,
     height: 1,
     weight: 1,
@@ -29,7 +36,7 @@ export default function CreatePokemon() {
 
   const validate = () => {
     let formIsValid = true;
-    if (!/^[A-Z]+$/gim.test(values.name)) {
+    if (!/^[A-Z]+|-$/gim.test(values.name)) {
       setNotValid((prev) => ({
         ...prev,
         name: 'The name can only have letters.',
@@ -50,6 +57,90 @@ export default function CreatePokemon() {
       }));
       formIsValid = false;
     }
+    if (values.hp > 255 || values.hp < 1 || !/^[0-9]+$/gim.test(values.hp)) {
+      setNotValid((prev) => ({
+        ...prev,
+        hp: `HP should be between 1 and 255`,
+      }));
+      formIsValid = false;
+    }
+    if (
+      values.attack > 200 ||
+      values.attack < 1 ||
+      !/^[0-9]+$/gim.test(values.attack)
+    ) {
+      setNotValid((prev) => ({
+        ...prev,
+        attack: `Attack should be between 1 and 200`,
+      }));
+      formIsValid = false;
+    }
+    if (
+      values.specialAttack > 200 ||
+      values.specialAttack < 1 ||
+      !/^[0-9]+$/gim.test(values.specialAttack)
+    ) {
+      setNotValid((prev) => ({
+        ...prev,
+        attack: `Special Attack should be between 1 and 200`,
+      }));
+      formIsValid = false;
+    }
+    if (
+      values.defense > 255 ||
+      values.defense < 1 ||
+      !/^[0-9]+$/gim.test(values.defense)
+    ) {
+      setNotValid((prev) => ({
+        ...prev,
+        defense: `Defense should be between 1 and 255`,
+      }));
+      formIsValid = false;
+    }
+    if (
+      values.specialDefense > 255 ||
+      values.specialDefense < 1 ||
+      !/^[0-9]+$/gim.test(values.specialDefense)
+    ) {
+      setNotValid((prev) => ({
+        ...prev,
+        defense: `Special Defense should be between 1 and 255`,
+      }));
+      formIsValid = false;
+    }
+    if (
+      values.speed > 200 ||
+      values.speed < 1 ||
+      !/^[0-9]+$/gim.test(values.speed)
+    ) {
+      setNotValid((prev) => ({
+        ...prev,
+        speed: `Speed should be between 1 and 200`,
+      }));
+      formIsValid = false;
+    }
+    if (
+      values.height > 2000 ||
+      values.height < 1 ||
+      !/^[0-9]+$/gim.test(values.height)
+    ) {
+      setNotValid((prev) => ({
+        ...prev,
+        height: `Height should be between 1 cm. and 2000 cm.`,
+      }));
+      formIsValid = false;
+    }
+    if (
+      values.weight > 100 ||
+      values.weight < 1 ||
+      !/^[0-9]+$/gim.test(values.weight)
+    ) {
+      setNotValid((prev) => ({
+        ...prev,
+        weight: `Weight should be between 1 kg. and 100 kg.`,
+      }));
+      formIsValid = false;
+    }
     if (!values.types.length) {
       setNotValid((prev) => ({ ...prev, types: 'Please select a type' }));
       formIsValid = false;
@@ -59,24 +150,12 @@ export default function CreatePokemon() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setValues((prev) => ({ ...prev, name: values.name.toLowerCase() }));
+
     if (validate()) {
       dispatch(createPokemon(values));
       setNotValid({});
-      setValues({
-        name: '',
-        hp: 1,
-        attack: 1,
-        defense: 1,
-        speed: 1,
-        height: 1,
-        weight: 1,
-        types: [],
-      });
-      alert(
-        values.name.charAt(0).toUpperCase() +
-          values.name.substring(1) +
-          ' created successfully!'
-      );
+      setSuccess(true);
     }
   };
 
@@ -106,82 +185,186 @@ export default function CreatePokemon() {
   };
 
   const handleChange = (e) => {
-    setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setValues((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+    setNotValid((prev) => ({ ...prev, [e.target.name]: '' }));
+  };
+
+  const handleCreatedClick = (e) => {
+    setValues({
+      name: '',
+      hp: 1,
+      attack: 1,
+      specialAttack: 1,
+      defense: 1,
+      specialDefense: 1,
+      speed: 1,
+      height: 1,
+      weight: 1,
+      types: [],
+    });
+    if (e.target.name === 'create') setSuccess(false);
   };
 
   if (loading) return <Loading />;
-
+  if (error) return <Error />;
+  if (success) {
+    return <CreatedPokemon poke={values} handleClick={handleCreatedClick} />;
+  }
   return (
     <div className={s.container}>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name: </label>
+      <h1 className={s.title}>Create your Pokémon!</h1>
+      <form className={s.content} onSubmit={handleSubmit}>
+        <div className={s.nameInput}>
+          <label className={s.formLabel}>Name: </label>
           <input
-            className={notValid.name && s.danger}
+            className={(notValid.name && s.dangerInput) || s.input}
             type="text"
             name="name"
             autoComplete="off"
             value={values.name}
             onChange={handleChange}
           />
+        </div>
+        <div className={s.alert}>
           {notValid.name && <span className={s.danger}> {notValid.name}</span>}
         </div>
-        <Slider
-          name="hp"
-          min="1"
-          max="255"
-          value={values.hp}
-          handleChange={handleChange}
-        />
-        <Slider
-          name="attack"
-          min="1"
-          max="255"
-          value={values.attack}
-          handleChange={handleChange}
-        />
-        <Slider
-          name="defense"
-          min="1"
-          max="255"
-          value={values.defense}
-          handleChange={handleChange}
-        />
-        <Slider
-          name="speed"
-          min="1"
-          max="200"
-          value={values.speed}
-          handleChange={handleChange}
-        />
-        <Slider
-          name="height"
-          min="1"
-          max="255"
-          value={values.height}
-          handleChange={handleChange}
-        />
-        <Slider
-          name="weight"
-          min="1"
-          max="255"
-          value={values.weight}
-          handleChange={handleChange}
-        />
-        <label className={notValid.types && s.danger}>
-          Select your Pokemon's types
+        <div className={s.heightWeight}>
+          <div className={s.heightInput}>
+            <label className={s.formLabel}>Height: </label>
+            <input
+              className={(notValid.height && s.dangerInput) || s.input}
+              type="text"
+              name="height"
+              autoComplete="off"
+              value={values.height}
+              onChange={handleChange}
+            />
+            <span> cm.</span>
+          </div>
+
+          <div className={s.weightInput}>
+            <label className={s.formLabel}>Weight: </label>
+            <input
+              className={(notValid.weight && s.dangerInput) || s.input}
+              type="text"
+              name="weight"
+              autoComplete="off"
+              value={values.weight}
+              onChange={handleChange}
+            />
+            <span> kg.</span>
+          </div>
+        </div>
+        <div className={s.alert}>
+          <span className={s.danger}>
+            {notValid.height && <span> {notValid.height}</span>}
+          </span>
+          <span className={s.danger}>
+            {notValid.weight && (
+              <span className={s.danger}> {notValid.weight}</span>
+            )}
+          </span>
+        </div>
+        <div className={s.stats}>
+          <SelectStats
+            label="HP"
+            name="hp"
+            min="1"
+            max="255"
+            value={values.hp}
+            notValid={notValid.hp}
+            handleChange={handleChange}
+          />
+          <SelectStats
+            label="Attack"
+            name="attack"
+            min="1"
+            max="200"
+            value={values.attack}
+            notValid={notValid.attack}
+            handleChange={handleChange}
+          />
+          <SelectStats
+            label="Special Attack"
+            name="specialAttack"
+            min="1"
+            max="200"
+            value={values.specialAttack}
+            notValid={notValid.specialAttack}
+            handleChange={handleChange}
+          />
+          <SelectStats
+            label="Defense"
+            name="defense"
+            min="1"
+            max="255"
+            value={values.defense}
+            notValid={notValid.defense}
+            handleChange={handleChange}
+          />
+          <SelectStats
+            label="Special Defense"
+            name="specialDefense"
+            min="1"
+            max="200"
+            value={values.specialDefense}
+            notValid={notValid.specialDefense}
+            handleChange={handleChange}
+          />
+          <SelectStats
+            label="Speed"
+            name="speed"
+            min="1"
+            max="200"
+            value={values.speed}
+            notValid={notValid.speed}
+            handleChange={handleChange}
+          />
+        </div>
+        <div className={s.alertSliders}>
+          <span>
+            {notValid.hp && <span className={s.danger}> {notValid.hp}</span>}
+          </span>
+          <span>
+            {notValid.attack && (
+              <span className={s.danger}> {notValid.attack}</span>
+            )}
+          </span>
+          <span>
+            {notValid.defense && (
+              <span className={s.danger}> {notValid.defense}</span>
+            )}
+          </span>
+          <span>
+            {notValid.speed && (
+              <span className={s.danger}> {notValid.speed}</span>
+            )}
+          </span>
+        </div>
+        <label className={(notValid.types && s.danger) || s.formLabel}>
+          Select your Pokémon's types
         </label>
         {notValid.types && <span className={s.danger}> {notValid.types}</span>}
-        <div name="types">
+        <div className={s.types}>
           {types &&
             types.map((t) => (
-              <label key={t.id}>
-                <input type="checkbox" name={t.name} onChange={handleChecked} />
+              <label key={t.id} className={s.checkLabel}>
+                <input
+                  className={s.checkbox}
+                  type="checkbox"
+                  name={t.name}
+                  onChange={handleChecked}
+                />
                 {t.name.charAt(0).toUpperCase() + t.name.substring(1)}
               </label>
             ))}
         </div>
-        <button type="submit">Create Pokemon</button>
+        <div className={s.button}>
+          <button type="submit">Create Pokémon</button>
+        </div>
       </form>
     </div>
   );

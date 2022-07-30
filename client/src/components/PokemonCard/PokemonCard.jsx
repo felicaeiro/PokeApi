@@ -21,7 +21,7 @@ export default function PokemonCard({ id, name, types, img }) {
     >
       <img src={img} alt={name} height="230px" className={s.pokeImage} />
       <div className={s.content}>
-        <h1 className={`${s.title} ${s[types[0]]}`}>
+        <h1 className={s.title} style={{ color: `var(--${types[0]})` }}>
           {name.charAt(0).toUpperCase() + name.substring(1)}
         </h1>
         <ul>

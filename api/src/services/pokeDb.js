@@ -40,15 +40,27 @@ getPokemonByIdFromDb = async (id) => {
 };
 
 createPokemon = async (pokemonCreate) => {
-  let { name, types, hp, attack, defense, speed, height, weight } =
-    pokemonCreate;
+  let {
+    name,
+    types,
+    hp,
+    attack,
+    specialAttack,
+    specialDefense,
+    defense,
+    speed,
+    height,
+    weight,
+  } = pokemonCreate;
   console.log(pokemonCreate);
   if (
     !name ||
     !types ||
     !hp ||
     !attack ||
+    !specialAttack ||
     !defense ||
+    !specialDefense ||
     !speed ||
     !height ||
     !weight
@@ -69,7 +81,9 @@ createPokemon = async (pokemonCreate) => {
     name,
     hp,
     attack,
+    specialAttack,
     defense,
+    specialDefense,
     speed,
     height,
     weight,
