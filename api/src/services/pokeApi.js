@@ -4,28 +4,29 @@ const urlPokemon = 'https://pokeapi.co/api/v2/pokemon';
 const urlTypes = 'https://pokeapi.co/api/v2/type';
 
 getPokemonsFromAPI = async () => {
-  const firstApiPage = await axios.get(urlPokemon).catch((error) => {
-    error.status = 502;
-    error.message = 'Unable to get Pokemons from API';
-    throw error;
-  });
-
-  const secondApiPage = await axios
-    .get(firstApiPage.data.next)
+  let allPokemons = [];
+  await axios
+    .get(urlPokemon)
+    .then((response) => {
+      allPokemons = response.data.results;
+      return axios.get(response.data.next);
+    })
+    .then((response) => {
+      allPokemons = [...allPokemons, ...response.data.results];
+    })
     .catch((error) => {
       error.status = 502;
-      error.message = 'Unable to get Pokemons from API';
+      error.message = 'Unable to get pokemons from API';
       throw error;
     });
 
-  const allPokemons = [
-    ...firstApiPage.data.results,
-    ...secondApiPage.data.results,
-  ];
-
   const allData = await Promise.all(
     allPokemons.map((x) => getPokemonUrl(x.url))
-  );
+  ).catch((error) => {
+    error.status = 502;
+    error.message = 'Unable to get pokemons from API';
+    throw error;
+  });
 
   return allData.map((x) => ({
     id: x.id,
@@ -54,14 +55,18 @@ getPokemonUrl = async (url) => {
       weight: response.data.weight * 0.1,
     }))
     .catch((error) => {
-      error.status = 404;
-      error.message = `The id doesn't belong to any Pokemon`;
+      error.status = 502;
+      error.message = 'Unable to get Pokemon info';
       throw error;
     });
 };
 
 getPokemonByIdFromApi = async (id) => {
-  return await getPokemonUrl(`${urlPokemon}/${id}`);
+  return await getPokemonUrl(`${urlPokemon}/${id}`).catch((error) => {
+    error.status = 404;
+    error.message = `The id doesn't belong to any Pokemon`;
+    throw error;
+  });
 };
 
 getTypesFromApi = async () => {
