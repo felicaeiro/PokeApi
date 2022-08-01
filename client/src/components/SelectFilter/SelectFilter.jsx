@@ -2,11 +2,10 @@ import React from 'react';
 import s from './SelectFilter.module.css';
 
 const SelectFilter = ({ name, handleSelect, options }) => {
-  // if (options.length === 1) return <></>;
   return (
     <div className={s.container}>
       <h4 className={s.title}>
-        {name.charAt(0).toUpperCase() + name.slice(1)}:{' '}
+        {name.charAt(0).toUpperCase() + name.substring(1).toLowerCase()}:
       </h4>
       {options.map((o, i) => (
         <label className={s.checkbox} key={i}>
@@ -14,9 +13,14 @@ const SelectFilter = ({ name, handleSelect, options }) => {
             checked={o.checked}
             type="checkbox"
             name={o.source || o.name}
-            onChange={(e) => handleSelect(name, e)}
+            onChange={(e) =>
+              handleSelect(
+                { key: name, value: e.target.name },
+                e.currentTarget.checked
+              )
+            }
           />
-          {o.name.charAt(0).toUpperCase() + o.name.slice(1)}
+          {o.name.charAt(0).toUpperCase() + o.name.substring(1).toLowerCase()}
         </label>
       ))}
     </div>

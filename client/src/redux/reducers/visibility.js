@@ -16,9 +16,7 @@ const visibility = (state = initialState, action) => {
     case SET_FILTER:
       return {
         ...state,
-        filter: state.filter
-          // .filter((f) => f.value !== action.payload.value)
-          .concat([action.payload]),
+        filter: state.filter.concat([action.payload]),
       };
     case REMOVE_FILTER:
       return {

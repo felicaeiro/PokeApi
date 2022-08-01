@@ -3,7 +3,7 @@ import s from './Pokemons.module.css';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import card from '../../img/card.png';
 import Pagination from '../Pagination/Pagination';
-import SideBar from '../../containers/SideBar/SideBar';
+import SideBar from '../SideBar/SideBar';
 
 const Pokemons = ({
   pokesToRender,
@@ -12,6 +12,7 @@ const Pokemons = ({
   filteredTypes,
   filteredSources,
   onPagination,
+  handleSelectFilter,
 }) => {
   return (
     <div className={s.container}>
@@ -20,6 +21,7 @@ const Pokemons = ({
           <SideBar
             filteredTypes={filteredTypes}
             filteredSources={filteredSources}
+            handleSelectFilter={handleSelectFilter}
           />
         </div>
         <div className={s.pokemons}>

@@ -1,16 +1,14 @@
 import { connect } from 'react-redux';
 import Pokemons from '../components/Pokemons/Pokemons';
-import { setPagination } from '../redux/actions';
+import { removeFilter, setFilter, setPagination } from '../redux/actions';
 
 const filterPokemons = (pokemons, filters) => {
   const result = pokemons.filter((poke) =>
     filters.every((filter) => {
       if (filter.key === 'types') {
-        if (filter.value === 'all') return pokemons;
         return poke.types.includes(filter.value);
       }
       if (filter.key === 'source') {
-        if (filter.value === 'all') return pokemons;
         return poke[filter.key] === filter.value;
       }
       return true;
@@ -91,6 +89,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onPagination: (paginator) => dispatch(setPagination(paginator)),
+    handleSelectFilter: (filter, isSelected) => {
+      if (isSelected) {
+        dispatch(setFilter(filter));
+      } else {
+        dispatch(removeFilter(filter));
+      }
+      dispatch(setPagination({ currentPage: 1, pokesPerPage: 12 }));
+    },
   };
 };
 

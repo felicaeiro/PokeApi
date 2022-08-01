@@ -77,7 +77,7 @@ createPokemon = async (pokemonCreate) => {
   });
 
   await newPoke.addType(type);
-
+  name = name.toLowerCase();
   let result = await Pokemon.findOne({
     where: { name },
     ...includeTypes,

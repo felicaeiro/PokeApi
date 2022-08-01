@@ -45,7 +45,6 @@ export const getAllPokemon = () => {
 
 export const getAllTypes = () => {
   return function (dispatch) {
-    dispatch(loading());
     fetch('http://localhost:3001/types')
       .then((response) => {
         if (!response.ok) {
@@ -76,7 +75,6 @@ export const createPokemon = (data) => {
     fetch('http://localhost:3001/pokemons', {
       method: 'POST',
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
