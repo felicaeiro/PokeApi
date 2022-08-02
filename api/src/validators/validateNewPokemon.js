@@ -1,5 +1,5 @@
 const { getPokemonsFromAPI } = require('../services/pokeApi');
-const { getPokemonsFromDB } = require('../services/pokeDb');
+const { getPokemonsFromDB, getTypesFromDb } = require('../services/pokeDb');
 
 validatePokemonParameters = async (pokemonCreate) => {
   const {
@@ -32,14 +32,34 @@ validatePokemonParameters = async (pokemonCreate) => {
     throw error;
   }
 
+  await validateName(name);
+  await validateTypes(types);
+};
+
+validateName = async (name) => {
   const pokemonsFromApi = await getPokemonsFromAPI();
   const pokemonsFromDb = await getPokemonsFromDB();
 
   const allPokemon = [...pokemonsFromApi, ...pokemonsFromDb];
-  const search = allPokemon.filter((p) => p.name === name);
-  if (search.length) {
+  const nameValidation = allPokemon.filter((p) => p.name === name);
+  if (nameValidation.length) {
     const error = new Error(`There's already a Pokémon with that name`);
     error.status = 409;
+    throw error;
+  }
+};
+
+validateTypes = async (types) => {
+  if (types.length > 2) {
+    const error = new Error(' You can only add up to two types');
+    error.status = 409;
+    throw error;
+  }
+
+  const typesValidation = await getTypesFromDb(types);
+  if (!typesValidation.length) {
+    const error = new Error('Invalid Pokemon type');
+    error.status = 404;
     throw error;
   }
 };

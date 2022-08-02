@@ -52,16 +52,9 @@ createPokemon = async (pokemonCreate) => {
     weight,
   } = pokemonCreate;
 
-  const type = await Type.findAll({ where: { name: types } });
-
-  if (!type.length) {
-    const error = new Error('Invalid Pokemon type');
-    error.status = 404;
-    throw error;
-  }
-
   const newPoke = await Pokemon.create({
     name,
+    types,
     hp,
     attack,
     specialAttack,
@@ -72,11 +65,18 @@ createPokemon = async (pokemonCreate) => {
     weight,
   }).catch((error) => {
     error.status = 503;
-    error.message = 'Unable to create Pokemon';
+    error.message = 'Unable to create Pokémon';
     throw error;
   });
 
-  await newPoke.addType(type);
+  const type = await getTypesFromDb(types);
+
+  await newPoke.addType(type).catch((error) => {
+    error.status = 503;
+    error.message = 'Unable to add type to Pokémon';
+    throw error;
+  });
+
   name = name.toLowerCase();
   let result = await Pokemon.findOne({
     where: { name },
@@ -86,8 +86,10 @@ createPokemon = async (pokemonCreate) => {
   return fixTypes(result);
 };
 
-getTypesFromDb = async () => {
-  const types = await Type.findAll().catch((error) => {
+getTypesFromDb = async (type) => {
+  const condition = type ? { where: { name: type } } : {};
+
+  const types = await Type.findAll(condition).catch((error) => {
     error.status = 503;
     error.message = 'Unable to get Pokemon types';
     throw error;

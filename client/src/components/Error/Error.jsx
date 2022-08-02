@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Error.module.css';
 import error_img from '../../img/error.gif';
 
-export const Error = () => {
+const Error = () => {
   return (
     <div>
       <img className={`${s.errorGif}`} src={error_img} alt="error" />
@@ -10,3 +10,4 @@ export const Error = () => {
     </div>
   );
 };
+export default Error;

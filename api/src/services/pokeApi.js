@@ -1,12 +1,12 @@
 const axios = require('axios');
 
-const urlPokemon = 'https://pokeapi.co/api/v2/pokemon';
-const urlTypes = 'https://pokeapi.co/api/v2/type';
+const PATHPokemon = 'https://pokeapi.co/api/v2/pokemon';
+const PATHTypes = 'https://pokeapi.co/api/v2/type';
 
 getPokemonsFromAPI = async () => {
   let allPokemons = [];
   await axios
-    .get(urlPokemon)
+    .get(PATHPokemon)
     .then((response) => {
       allPokemons = response.data.results;
       return axios.get(response.data.next);
@@ -62,7 +62,7 @@ getPokemonUrl = async (url) => {
 };
 
 getPokemonByIdFromApi = async (id) => {
-  return await getPokemonUrl(`${urlPokemon}/${id}`).catch((error) => {
+  return await getPokemonUrl(`${PATHPokemon}/${id}`).catch((error) => {
     error.status = 404;
     error.message = `The id doesn't belong to any Pokemon`;
     throw error;
@@ -71,7 +71,7 @@ getPokemonByIdFromApi = async (id) => {
 
 getTypesFromApi = async () => {
   const types = await axios
-    .get(urlTypes)
+    .get(PATHTypes)
     .then((response) => response.data.results)
     .catch((error) => {
       error.status = 502;

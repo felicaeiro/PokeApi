@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import card from '../../img/card.png';
 import Loading from '../../components/Loading/Loading';
-import { Error } from '../../components/Error/Error';
+import Error from '../../components/Error/Error';
 import { getPokemonDetail } from '../../redux/actions';
 import s from './PokemonDetail.module.css';
 import { Link } from 'react-router-dom';

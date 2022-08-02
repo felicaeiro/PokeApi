@@ -1,11 +1,16 @@
 import React, { useEffect } from 'react';
 import s from './Home.module.css';
 import SearchBar from '../SearchBar/SearchBar';
-import { getAllPokemon, getAllTypes, setSort } from '../../redux/actions';
+import {
+  getAllPokemon,
+  getAllTypes,
+  setPagination,
+  setSort,
+} from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/Loading/Loading';
 import VisiblePokemons from '../VisiblePokemons';
-import { Error } from '../../components/Error/Error';
+import Error from '../../components/Error/Error';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -14,6 +19,7 @@ export default function Home() {
     dispatch(getAllPokemon());
     dispatch(getAllTypes());
     dispatch(setSort({ attribute: 'id', order: 'asc' }));
+    dispatch(setPagination({ currentPage: 1, pokesPerPage: 12 }));
   }, [dispatch]);
 
   const { allPokemon, loading, error } = useSelector((state) => state.data);

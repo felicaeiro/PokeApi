@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PokemonDetailCard from '../../components/PokemonDetailCard/PokemonDetailCard';
+import PokemonDetailCard from '../PokemonDetailCard/PokemonDetailCard';
 import s from './CreatedPokemon.module.css';
 
 export default function CreatedPokemon({ poke, handleClick }) {

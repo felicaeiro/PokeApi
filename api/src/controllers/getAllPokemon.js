@@ -13,7 +13,7 @@ module.exports = {
       if (name) {
         name = name.toLowerCase();
         result = result.filter((poke) => poke.name === name);
-        if (result.length === 0) {
+        if (!result.length) {
           const error = new Error(`The Pokemon ${name} doesn't exist`);
           error.status = 404;
           throw error;

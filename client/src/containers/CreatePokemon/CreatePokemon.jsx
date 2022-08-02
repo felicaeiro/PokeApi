@@ -5,8 +5,8 @@ import { createPokemon, getAllPokemon, getAllTypes } from '../../redux/actions';
 import s from './CreatePokemon.module.css';
 import SelectStats from '../../components/SelectStats/SelectStats';
 import Loading from '../../components/Loading/Loading';
-import { Error } from '../../components/Error/Error';
-import CreatedPokemon from '../CreatedPokemon/CreatedPokemon';
+import Error from '../../components/Error/Error';
+import CreatedPokemon from '../../components/CreatedPokemon/CreatedPokemon';
 
 export default function CreatePokemon() {
   const dispatch = useDispatch();
@@ -120,24 +120,24 @@ export default function CreatePokemon() {
       formIsValid = false;
     }
     if (
-      values.height > 2000 ||
+      values.height > 200 ||
       values.height < 1 ||
       !/^[0-9]+$/gim.test(values.height)
     ) {
       setNotValid((prev) => ({
         ...prev,
-        height: `Height should be between 1 cm. and 2000 cm.`,
+        height: `Height should be between 1 cm. and 200 cm.`,
       }));
       formIsValid = false;
     }
     if (
-      values.weight > 100 ||
+      values.weight > 1000 ||
       values.weight < 1 ||
       !/^[0-9]+$/gim.test(values.weight)
     ) {
       setNotValid((prev) => ({
         ...prev,
-        weight: `Weight should be between 1 kg. and 100 kg.`,
+        weight: `Weight should be between 1 kg. and 1000 kg.`,
       }));
       formIsValid = false;
     }

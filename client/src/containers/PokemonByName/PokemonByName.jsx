@@ -7,7 +7,7 @@ import { getPokeByName } from '../../redux/actions';
 import Loading from '../../components/Loading/Loading';
 import PokemonCard from '../../components/PokemonCard/PokemonCard';
 import SearchBar from '../SearchBar/SearchBar';
-import { Error } from '../../components/Error/Error';
+import Error from '../../components/Error/Error';
 
 export default function PokemonByName({ match }) {
   const { name } = match.params;
