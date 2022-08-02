@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.73831590.chunk.css",
+    "main.js": "/static/js/main.0025028a.chunk.js",
+    "main.js.map": "/static/js/main.0025028a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.9a1f813e.js",
+    "runtime-main.js.map": "/static/js/runtime-main.9a1f813e.js.map",
+    "static/js/2.ffaf8ae5.chunk.js": "/static/js/2.ffaf8ae5.chunk.js",
+    "static/js/2.ffaf8ae5.chunk.js.map": "/static/js/2.ffaf8ae5.chunk.js.map",
+    "static/js/3.aed640a5.chunk.js": "/static/js/3.aed640a5.chunk.js",
+    "static/js/3.aed640a5.chunk.js.map": "/static/js/3.aed640a5.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.73831590.chunk.css.map": "/static/css/main.73831590.chunk.css.map",
+    "static/js/2.ffaf8ae5.chunk.js.LICENSE.txt": "/static/js/2.ffaf8ae5.chunk.js.LICENSE.txt",
+    "static/media/404.482f9324.png": "/static/media/404.482f9324.png",
+    "static/media/card.e4796584.png": "/static/media/card.e4796584.png",
+    "static/media/error.d875fb5b.gif": "/static/media/error.d875fb5b.gif",
+    "static/media/LandingPage.module.css": "/static/media/landingpage.3114d225.png",
+    "static/media/loading.1861fd8f.gif": "/static/media/loading.1861fd8f.gif",
+    "static/media/pokemonnav.83b95c47.png": "/static/media/pokemonnav.83b95c47.png",
+    "static/media/SelectStats.module.css": "/static/media/rangethumb.cb81c8c0.png",
+    "static/media/shadow.png": "/static/media/shadow.a1230bc4.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9a1f813e.js",
+    "static/js/2.ffaf8ae5.chunk.js",
+    "static/css/main.73831590.chunk.css",
+    "static/js/main.0025028a.chunk.js"
+  ]
+}
