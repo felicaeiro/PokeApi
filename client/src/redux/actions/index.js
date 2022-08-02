@@ -22,12 +22,10 @@ export const getAllPokemon = () => {
     fetch('http://localhost:3001/pokemons')
       .then((response) => {
         if (!response.ok) {
-          response
-            .then((error) => dispatch(handleError(error)))
-            .catch(
-              (error) =>
-                new Error(`${response.status} ${response.statusText}: ${error}`)
-            );
+          dispatch(handleError(response)).catch(
+            (error) =>
+              new Error(`${response.status} ${response.statusText}: ${error}`)
+          );
         } else {
           response
             .json()
@@ -48,12 +46,10 @@ export const getAllTypes = () => {
     fetch('http://localhost:3001/types')
       .then((response) => {
         if (!response.ok) {
-          response
-            .then((error) => dispatch(handleError(error)))
-            .catch(
-              (error) =>
-                new Error(`${response.status} ${response.statusText}: ${error}`)
-            );
+          dispatch(handleError(response)).catch(
+            (error) =>
+              new Error(`${response.status} ${response.statusText}: ${error}`)
+          );
         } else {
           response
             .json()
@@ -81,12 +77,10 @@ export const createPokemon = (data) => {
     })
       .then((response) => {
         if (!response.ok) {
-          response
-            .then((error) => dispatch(handleError(error)))
-            .catch(
-              (error) =>
-                new Error(`${response.status} ${response.statusText}: ${error}`)
-            );
+          dispatch(handleError(response)).catch(
+            (error) =>
+              new Error(`${response.status} ${response.statusText}: ${error}`)
+          );
         } else {
           response
             .json()
@@ -108,12 +102,10 @@ export const getPokeByName = (name) => {
     fetch(`http://localhost:3001/pokemons?name=${name}`)
       .then((response) => {
         if (!response.ok) {
-          response
-            .then((error) => dispatch(handleError(error)))
-            .catch(
-              (error) =>
-                new Error(`${response.status} ${response.statusText}: ${error}`)
-            );
+          dispatch(handleError(response)).catch(
+            (error) =>
+              new Error(`${response.status} ${response.statusText}: ${error}`)
+          );
         } else {
           response
             .json()
@@ -135,12 +127,10 @@ export const getPokemonDetail = (idPokemon) => {
     fetch(`http://localhost:3001/pokemons/${idPokemon}`)
       .then((response) => {
         if (!response.ok) {
-          response
-            .then((error) => dispatch(handleError(error)))
-            .catch(
-              (error) =>
-                new Error(`${response.status} ${response.statusText}: ${error}`)
-            );
+          dispatch(handleError(response)).catch(
+            (error) =>
+              new Error(`${response.status} ${response.statusText}: ${error}`)
+          );
         } else {
           response
             .json()
@@ -172,8 +162,6 @@ export const setSort = (sort) => {
 export const setPagination = (pagination) => {
   return { type: SET_PAGINATION, payload: pagination };
 };
-
-//export const setPokesPerPage = (po)
 
 export const loading = () => {
   return { type: LOADING };

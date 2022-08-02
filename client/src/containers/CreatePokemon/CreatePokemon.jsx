@@ -50,7 +50,7 @@ export default function CreatePokemon() {
       }));
       formIsValid = false;
     }
-    if (allPokemon.some((p) => p.name === values.name)) {
+    if (allPokemon.some((p) => p.name === values.name.toLowerCase())) {
       setNotValid((prev) => ({
         ...prev,
         name: `There's already a Pokémon with that name`,
@@ -150,7 +150,8 @@ export default function CreatePokemon() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setValues((prev) => ({ ...prev, name: values.name.toLowerCase() }));
+
+    setValues((prev) => ({ ...prev, name: values.name }));
 
     if (validate()) {
       dispatch(createPokemon(values));

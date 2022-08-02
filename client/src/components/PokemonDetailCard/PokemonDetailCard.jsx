@@ -35,7 +35,7 @@ export default function PokemonDetailCard({
         />
         <div className={s.nameTypes}>
           <h1 className={s.title} style={{ color: `var(--${types[0]})` }}>
-            {name.charAt(0).toUpperCase() + name.substring(1)}
+            {name.charAt(0).toUpperCase() + name.substring(1).toLowerCase()}
           </h1>
           <ul className={s.typesList}>
             {types.map((t, i) => (

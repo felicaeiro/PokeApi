@@ -1,9 +1,10 @@
 .container {
   max-width: 1000px;
   margin: 130px auto 50px;
+  padding-bottom: 1px;
   box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
   border-radius: 20px;
-  height: 615px;
+  height: max-content;
 }
 .topInfo {
   display: flex;
@@ -54,6 +55,7 @@
   display: flex;
   justify-content: space-evenly;
   margin: 80px auto;
+
   width: 50%;
   text-align: center;
 }

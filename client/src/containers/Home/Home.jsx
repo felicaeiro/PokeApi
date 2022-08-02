@@ -13,6 +13,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(getAllPokemon());
     dispatch(getAllTypes());
+    dispatch(setSort({ attribute: 'id', order: 'asc' }));
   }, [dispatch]);
 
   const { allPokemon, loading, error } = useSelector((state) => state.data);
