@@ -29,8 +29,8 @@ export default function CreatePokemon() {
     defense: 1,
     specialDefense: 1,
     speed: 1,
-    height: 1,
-    weight: 1,
+    height: 0,
+    weight: 0,
     types: [],
   });
 
@@ -120,24 +120,24 @@ export default function CreatePokemon() {
       formIsValid = false;
     }
     if (
-      values.height > 200 ||
+      values.height > 20 ||
       values.height < 1 ||
       !/^[0-9]+$/gim.test(values.height)
     ) {
       setNotValid((prev) => ({
         ...prev,
-        height: `Height should be between 1 cm. and 200 cm.`,
+        height: `Height should be between 1 cm. and 20 cm.`,
       }));
       formIsValid = false;
     }
     if (
       values.weight > 1000 ||
       values.weight < 1 ||
-      !/^[0-9]+$/gim.test(values.weight)
+      !/^[0-9]*(\.[0-9]{0,2})?$/gim.test(values.weight)
     ) {
       setNotValid((prev) => ({
         ...prev,
-        weight: `Weight should be between 1 kg. and 1000 kg.`,
+        weight: `Weight should be between 1.00 kg. and 1000.00 kg.`,
       }));
       formIsValid = false;
     }
@@ -243,7 +243,7 @@ export default function CreatePokemon() {
               value={values.height}
               onChange={handleChange}
             />
-            <span> cm.</span>
+            <span> m.</span>
           </div>
 
           <div>

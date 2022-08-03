@@ -51,8 +51,8 @@ getPokemonUrl = async (url) => {
       defense: response.data.stats[2].base_stat,
       specialDefense: response.data.stats[4].base_stat,
       speed: response.data.stats[5].base_stat,
-      height: response.data.height * 10,
-      weight: response.data.weight * 0.1,
+      height: Math.round(response.data.height * 10) / 100,
+      weight: Math.round(response.data.weight * 10) / 100,
     }))
     .catch((error) => {
       error.status = 502;

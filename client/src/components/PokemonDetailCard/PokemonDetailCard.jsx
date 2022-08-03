@@ -65,7 +65,7 @@ export default function PokemonDetailCard({
               >
                 Height
               </p>
-              <p>{height} cm.</p>
+              <p>{height} m.</p>
             </div>
           </div>
         </div>

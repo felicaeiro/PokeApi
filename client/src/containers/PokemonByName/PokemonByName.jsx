@@ -6,7 +6,7 @@ import card from '../../img/card.png';
 import { getPokeByName } from '../../redux/actions';
 import Loading from '../../components/Loading/Loading';
 import PokemonCard from '../../components/PokemonCard/PokemonCard';
-import SearchBar from '../SearchBar/SearchBar';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import Error from '../../components/Error/Error';
 
 export default function PokemonByName({ match }) {
@@ -17,14 +17,16 @@ export default function PokemonByName({ match }) {
     dispatch(getPokeByName(name));
   }, [dispatch, name]);
 
-  const { search, loading, error } = useSelector((state) => state.data);
+  const { allPokemon, search, loading, error } = useSelector(
+    (state) => state.data
+  );
   if (loading) return <Loading />;
   if (error) return <Error />;
 
   return (
     <div className={s.container}>
       <div className={s.search}>
-        <SearchBar />
+        <SearchBar allPokemon={allPokemon} />
       </div>
       {search.name && (
         <PokemonCard

@@ -3,7 +3,10 @@ import s from './SelectFilter.module.css';
 
 const SelectFilter = ({ name, handleSelect, options }) => {
   return (
-    <div className={s.container}>
+    <div
+      className={s.container}
+      style={(options.hidden && { display: 'none' }) || { display: 'block' }}
+    >
       <h4 className={s.title}>
         {name.charAt(0).toUpperCase() + name.substring(1).toLowerCase()}:
       </h4>

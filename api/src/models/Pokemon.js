@@ -62,14 +62,14 @@ module.exports = (sequelize) => {
         },
       },
       height: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL(10, 1),
         validate: {
           min: 1,
-          max: 200,
+          max: 20,
         },
       },
       weight: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL(10, 1),
         validate: {
           min: 1,
           max: 1000,

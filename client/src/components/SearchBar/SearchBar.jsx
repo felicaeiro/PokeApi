@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import s from './SearchBar.module.css';
 
-export default function SearchBar() {
+export default function SearchBar({ allPokemon }) {
   const [poke, setPoke] = useState('');
   const [notValid, setNotValid] = useState('');
 
   const history = useHistory();
-
-  const { allPokemon } = useSelector((state) => state.data);
 
   const handleChange = (e) => {
     setPoke(e.target.value);

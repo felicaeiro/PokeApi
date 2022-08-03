@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import s from './Home.module.css';
-import SearchBar from '../SearchBar/SearchBar';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import {
   getAllPokemon,
   getAllTypes,
@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <div className={s.container}>
       <div className={s.topBar}>
-        <SearchBar />
+        <SearchBar allPokemon={allPokemon} />
 
         <div className={s.sorter}>
           <h4>Sort By: </h4>

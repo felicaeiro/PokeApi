@@ -42,20 +42,32 @@ const filterTypes = (allPokemon, types, filters) => {
   });
 };
 
-const filterSources = (allPokemon, filters) => {
-  const sources = [
+const filterSources = (allPokemon, filteredPokemons, filters) => {
+  let sources = [
     { name: 'created', source: 'db' },
     { name: 'existing', source: 'api' },
   ];
 
-  sources.forEach(
-    (s) => (s.checked = filters.some((f) => f.value === s.source))
-  );
-  return sources.filter((s) => {
+  const totalSources = sources.filter((s) => {
     return allPokemon.some((p) => {
       return p.source === s.source;
     });
   });
+
+  sources.forEach(
+    (s) => (s.checked = filters.some((f) => f.value === s.source))
+  );
+
+  sources = sources.filter((s) => {
+    return filteredPokemons.some((p) => {
+      return p.source === s.source;
+    });
+  });
+
+  if (totalSources.length === 1) sources.hidden = true;
+  else sources.hidden = false;
+
+  return sources;
 };
 
 const mapStateToProps = (state) => {
@@ -74,6 +86,7 @@ const mapStateToProps = (state) => {
     state.visibility.filter
   );
   const filteredSources = filterSources(
+    state.data.allPokemon,
     filteredPokemons,
     state.visibility.filter
   );
