@@ -54,7 +54,7 @@ export default function PokemonDetailCard({
               <p className={s.subtitle} style={{ color: `var(--${types[0]})` }}>
                 Weight
               </p>
-              <p>{weight} kg. </p>
+              <p>{parseFloat(weight).toFixed(1)} kg. </p>
             </div>
             <div>
               <p
@@ -65,7 +65,7 @@ export default function PokemonDetailCard({
               >
                 Height
               </p>
-              <p>{height} m.</p>
+              <p>{parseFloat(height).toFixed(1)} m.</p>
             </div>
           </div>
         </div>

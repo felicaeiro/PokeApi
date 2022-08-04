@@ -6,7 +6,11 @@ const {
 module.exports = {
   postPokemon: async function (req, res, next) {
     try {
-      await validatePokemonParameters(req.body);
+      const errors = await validatePokemonParameters(req.body);
+      if (errors) {
+        errors.status = 400;
+        throw errors;
+      }
 
       const newPoke = await createPokemon(req.body);
       res.send(newPoke);

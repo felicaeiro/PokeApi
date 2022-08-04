@@ -36,7 +36,7 @@ export default function CreatePokemon() {
 
   const validate = () => {
     let formIsValid = true;
-    if (!/^[A-Z]+|-$/gim.test(values.name)) {
+    if (!/^[A-Z\-]+$/gi.test(values.name)) {
       setNotValid((prev) => ({
         ...prev,
         name: 'The name can only have letters.',
@@ -57,7 +57,7 @@ export default function CreatePokemon() {
       }));
       formIsValid = false;
     }
-    if (values.hp > 255 || values.hp < 1 || !/^[0-9]+$/gim.test(values.hp)) {
+    if (values.hp > 255 || values.hp < 1 || !/^[0-9]+$/gi.test(values.hp)) {
       setNotValid((prev) => ({
         ...prev,
         hp: `HP should be between 1 and 255`,
@@ -67,7 +67,7 @@ export default function CreatePokemon() {
     if (
       values.attack > 200 ||
       values.attack < 1 ||
-      !/^[0-9]+$/gim.test(values.attack)
+      !/^[0-9]+$/gi.test(values.attack)
     ) {
       setNotValid((prev) => ({
         ...prev,
@@ -78,7 +78,7 @@ export default function CreatePokemon() {
     if (
       values.specialAttack > 200 ||
       values.specialAttack < 1 ||
-      !/^[0-9]+$/gim.test(values.specialAttack)
+      !/^[0-9]+$/gi.test(values.specialAttack)
     ) {
       setNotValid((prev) => ({
         ...prev,
@@ -89,7 +89,7 @@ export default function CreatePokemon() {
     if (
       values.defense > 255 ||
       values.defense < 1 ||
-      !/^[0-9]+$/gim.test(values.defense)
+      !/^[0-9]+$/gi.test(values.defense)
     ) {
       setNotValid((prev) => ({
         ...prev,
@@ -100,7 +100,7 @@ export default function CreatePokemon() {
     if (
       values.specialDefense > 255 ||
       values.specialDefense < 1 ||
-      !/^[0-9]+$/gim.test(values.specialDefense)
+      !/^[0-9]+$/gi.test(values.specialDefense)
     ) {
       setNotValid((prev) => ({
         ...prev,
@@ -111,7 +111,7 @@ export default function CreatePokemon() {
     if (
       values.speed > 200 ||
       values.speed < 1 ||
-      !/^[0-9]+$/gim.test(values.speed)
+      !/^[0-9]+$/gi.test(values.speed)
     ) {
       setNotValid((prev) => ({
         ...prev,
@@ -121,23 +121,23 @@ export default function CreatePokemon() {
     }
     if (
       values.height > 20 ||
-      values.height < 1 ||
-      !/^[0-9]+$/gim.test(values.height)
+      values.height < 0 ||
+      !/^([0-9]*[.])?[0-9]+$/gi.test(values.height)
     ) {
       setNotValid((prev) => ({
         ...prev,
-        height: `Height should be between 1 cm. and 20 cm.`,
+        height: `Height should be between 0.1 m. and 20 m.`,
       }));
       formIsValid = false;
     }
     if (
       values.weight > 1000 ||
-      values.weight < 1 ||
-      !/^[0-9]*(\.[0-9]{0,2})?$/gim.test(values.weight)
+      values.weight < 0 ||
+      !/^([0-9]*[.])?[0-9]+$/gi.test(values.weight)
     ) {
       setNotValid((prev) => ({
         ...prev,
-        weight: `Weight should be between 1.00 kg. and 1000.00 kg.`,
+        weight: `Weight should be between 0.1 kg. and 1000 kg.`,
       }));
       formIsValid = false;
     }
