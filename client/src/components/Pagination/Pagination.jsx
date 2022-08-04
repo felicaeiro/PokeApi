@@ -14,6 +14,18 @@ const Pagination = ({
   }
   return (
     <div className={s.pagination}>
+      {currentPage === 1 ? (
+        <></>
+      ) : (
+        <button
+          onClick={() =>
+            onPagination({ currentPage: currentPage - 1, pokesPerPage: 12 })
+          }
+          className={s.page}
+        >
+          Prev
+        </button>
+      )}
       {pageNumbers.map((number) => (
         <button
           key={number}
@@ -25,6 +37,18 @@ const Pagination = ({
           {number}
         </button>
       ))}
+      {currentPage === pageNumbers.length ? (
+        <></>
+      ) : (
+        <button
+          onClick={() =>
+            onPagination({ currentPage: currentPage + 1, pokesPerPage: 12 })
+          }
+          className={s.page}
+        >
+          Next
+        </button>
+      )}
     </div>
   );
 };

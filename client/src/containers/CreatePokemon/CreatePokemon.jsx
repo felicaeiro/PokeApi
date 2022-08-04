@@ -36,7 +36,7 @@ export default function CreatePokemon() {
 
   const validate = () => {
     let formIsValid = true;
-    if (!/^[A-Z\-]+$/gi.test(values.name)) {
+    if (!/^[A-Z-]+$/gi.test(values.name)) {
       setNotValid((prev) => ({
         ...prev,
         name: 'The name can only have letters.',
@@ -121,7 +121,7 @@ export default function CreatePokemon() {
     }
     if (
       values.height > 20 ||
-      values.height < 0 ||
+      values.height < 0.1 ||
       !/^([0-9]*[.])?[0-9]+$/gi.test(values.height)
     ) {
       setNotValid((prev) => ({
@@ -132,7 +132,7 @@ export default function CreatePokemon() {
     }
     if (
       values.weight > 1000 ||
-      values.weight < 0 ||
+      values.weight < 0.1 ||
       !/^([0-9]*[.])?[0-9]+$/gi.test(values.weight)
     ) {
       setNotValid((prev) => ({
@@ -169,7 +169,6 @@ export default function CreatePokemon() {
       if (values.types.length < limit) {
         setValues({ ...values, types: [...values.types, selectedType] });
       } else {
-        e.preventDefault();
         setNotValid({
           ...notValid,
           types: 'You can only select up to two types.',
@@ -202,8 +201,8 @@ export default function CreatePokemon() {
       defense: 1,
       specialDefense: 1,
       speed: 1,
-      height: 1,
-      weight: 1,
+      height: 0,
+      weight: 0,
       types: [],
     });
     if (e.target.name === 'create') setSuccess(false);

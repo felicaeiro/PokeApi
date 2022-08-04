@@ -15,14 +15,14 @@ export default function SearchBar({ allPokemon }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (poke === '') setNotValid('A Pokemon name is required');
+    if (poke === '') setNotValid('A Pokémon name is required');
     else {
       const searchedPoke = allPokemon.filter(
         (p) => p.name === poke.toLowerCase()
       );
       if (searchedPoke.length) {
         history.push(`/home/search/${poke}`);
-      } else setNotValid(`The Pokemon ${poke} doesn't exist`);
+      } else setNotValid(`The Pokémon ${poke} doesn't exist`);
     }
   };
 
