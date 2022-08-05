@@ -20,9 +20,9 @@ const filterPokemons = (pokemons, filters) => {
 const sortPokemons = (filteredPokemons, sorter) => {
   return filteredPokemons.sort((a, b) => {
     if (b[sorter.attribute] > a[sorter.attribute]) {
-      return sorter.order === 'asc' ? -1 : 1;
+      return sorter.order === 'desc' ? 1 : -1;
     }
-    return sorter.order === 'asc' ? 1 : -1;
+    return sorter.order === 'desc' ? -1 : 1;
   });
 };
 
@@ -95,7 +95,7 @@ const mapStateToProps = (state) => {
     filteredSources,
     pokesToRender,
     totalPokemons: filteredPokemons.length,
-    currentPage: state.visibility.pagination.currentPage,
+    pagination: state.visibility.pagination,
   };
 };
 

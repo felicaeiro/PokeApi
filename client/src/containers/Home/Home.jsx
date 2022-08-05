@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './Home.module.css';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import {
@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/Loading/Loading';
 import VisiblePokemons from '../VisiblePokemons';
 import Error from '../../components/Error/Error';
+import Sorter from '../../components/Sorter/Sorter';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -18,19 +19,23 @@ export default function Home() {
   useEffect(() => {
     dispatch(getAllPokemon());
     dispatch(getAllTypes());
-    dispatch(setSort({ attribute: 'id', order: 'asc' }));
-    dispatch(setPagination({ currentPage: 1, pokesPerPage: 12 }));
   }, [dispatch]);
 
-  const { allPokemon, loading, error } = useSelector((state) => state.data);
+  const {
+    data: { allPokemon, loading, error },
+    visibility: { sort },
+  } = useSelector((state) => state);
 
   allPokemon.forEach((x) =>
     Number(x.id) ? (x.source = 'api') : (x.source = 'db')
   );
 
   const handleSelectSorter = (e) => {
-    let sorterValues = e.target.value.split(' ');
-    const sorter = { attribute: sorterValues[0], order: sorterValues[1] };
+    let sorter = sort;
+    if (e.target.name === 'attribute')
+      sorter = { ...sorter, attribute: e.target.value };
+    if (e.target.name === 'order')
+      sorter = { ...sorter, order: e.target.value };
     dispatch(setSort(sorter));
   };
 
@@ -41,21 +46,7 @@ export default function Home() {
     <div className={s.container}>
       <div className={s.topBar}>
         <SearchBar allPokemon={allPokemon} />
-
-        <div className={s.sorter}>
-          <h4>Sort By: </h4>
-          <select
-            className={s.select}
-            name={'sorter'}
-            onChange={(e) => handleSelectSorter(e)}
-          >
-            <option label="Default" value={'id asc'} />
-            <option label="A - Z" value={'name asc'} />
-            <option label="Z - A" value={'name desc'} />
-            <option label="Lowest Attack" value={'attack asc'} />
-            <option label="Highest Attack" value={'attack desc'} />
-          </select>
-        </div>
+        <Sorter handleSelect={handleSelectSorter} sort={sort} />
       </div>
       <VisiblePokemons />
     </div>

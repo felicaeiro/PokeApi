@@ -18,9 +18,9 @@ export const handleError = (error) => {
 };
 
 export const getAllPokemon = () => {
-  return async function (dispatch) {
+  return function (dispatch) {
     dispatch(loading());
-    await axios
+    axios
       .get('http://localhost:3001/pokemons')
       .then((response) =>
         dispatch({ type: GET_ALL_POKEMONS, payload: response.data })
@@ -33,8 +33,8 @@ export const getAllPokemon = () => {
 };
 
 export const getAllTypes = () => {
-  return async function (dispatch) {
-    await axios
+  return function (dispatch) {
+    axios
       .get('http://localhost:3001/types')
       .then((response) =>
         dispatch({ type: GET_ALL_TYPES, payload: response.data })
@@ -47,9 +47,9 @@ export const getAllTypes = () => {
 };
 
 export const createPokemon = (data) => {
-  return async function (dispatch) {
+  return function (dispatch) {
     dispatch(loading());
-    await axios
+    axios
       .post('http://localhost:3001/pokemons', data)
       .then((response) =>
         dispatch({ type: CREATE_POKEMON, payload: response.data })
@@ -62,9 +62,9 @@ export const createPokemon = (data) => {
 };
 
 export const getPokeByName = (name) => {
-  return async function (dispatch) {
+  return function (dispatch) {
     dispatch(loading());
-    await axios
+    axios
       .get(`http://localhost:3001/pokemons?name=${name}`)
       .then((response) =>
         dispatch({ type: SEARCH_BY_NAME, payload: response.data[0] })
@@ -77,9 +77,9 @@ export const getPokeByName = (name) => {
 };
 
 export const getPokemonDetail = (idPokemon) => {
-  return async function (dispatch) {
+  return function (dispatch) {
     dispatch(loading());
-    await axios
+    axios
       .get(`http://localhost:3001/pokemons/${idPokemon}`)
       .then((response) =>
         dispatch({ type: GET_POKEMON_DETAIL, payload: response.data })
@@ -99,7 +99,6 @@ export const removeFilter = (filter) => {
   return { type: REMOVE_FILTER, payload: filter };
 };
 
-//{attribute: name/strength, orderBy: asc/desc}
 export const setSort = (sort) => {
   return { type: SET_SORTER, payload: sort };
 };

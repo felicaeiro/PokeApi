@@ -40,7 +40,7 @@ export default function SearchBar({ allPokemon }) {
           className={`${s.input} `}
         />
         <button type="submit" className={s.searchIcon}>
-          <i className="fa-solid fa-magnifying-glass"></i>
+          <i className="fa-solid fa-magnifying-glass" />
         </button>
       </form>
       {notValid && <span className={`${s.danger}`}>{notValid}</span>}

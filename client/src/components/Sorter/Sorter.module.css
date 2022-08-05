@@ -1,0 +1,52 @@
+.sorter {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 330px;
+}
+
+.selectAttribute {
+  height: 35px;
+  border: none;
+  border-bottom: 2px solid #3e3e3e;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  outline: none;
+}
+
+.selectAttribute option {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: #3e3e3e;
+}
+.selectOrder {
+  display: inherit;
+  height: 22px;
+}
+.right {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+.left {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+.left i,
+.right i {
+  padding-top: 3px;
+}
+.selectOrder input[type='radio'] {
+  display: none;
+}
+.selectOrder label {
+  display: inline-block;
+  background-color: #ddd;
+  padding: 0px 11px;
+  font-family: Arial;
+  font-size: 16px;
+  cursor: pointer;
+}
+.selectOrder input[type='radio']:checked + label {
+  background-color: #3e3e3e;
+  color: #ddd;
+}

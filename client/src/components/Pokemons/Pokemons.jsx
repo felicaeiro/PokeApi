@@ -8,7 +8,7 @@ import SideBar from '../SideBar/SideBar';
 const Pokemons = ({
   pokesToRender,
   totalPokemons,
-  currentPage,
+  pagination,
   filteredTypes,
   filteredSources,
   onPagination,
@@ -17,13 +17,11 @@ const Pokemons = ({
   return (
     <div className={s.container}>
       <div className={s.topContainer}>
-        <div className={s.sideBar}>
-          <SideBar
-            filteredTypes={filteredTypes}
-            filteredSources={filteredSources}
-            handleSelectFilter={handleSelectFilter}
-          />
-        </div>
+        <SideBar
+          filteredTypes={filteredTypes}
+          filteredSources={filteredSources}
+          handleSelectFilter={handleSelectFilter}
+        />
         <div className={s.pokemons}>
           {pokesToRender.map((p) => (
             <PokemonCard
@@ -37,10 +35,9 @@ const Pokemons = ({
         </div>
       </div>
       <Pagination
-        pokesPerPage={12}
+        pagination={pagination}
         totalPokes={totalPokemons}
         onPagination={onPagination}
-        currentPage={currentPage}
       />
     </div>
   );

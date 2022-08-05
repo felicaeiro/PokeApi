@@ -13,9 +13,3 @@
   margin: auto;
   flex-wrap: wrap;
 }
-
-.sideBar {
-  margin-right: 4rem;
-  padding-right: 1rem;
-  min-width: 90px;
-}

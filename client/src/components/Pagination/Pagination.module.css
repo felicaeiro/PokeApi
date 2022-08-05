@@ -1,4 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+  padding-bottom: 30px;
+}
 
 .pagination {
   margin-left: 12%;
@@ -30,4 +36,23 @@
 .pagination .page:hover {
   background-color: #ddd;
   border-radius: 50%;
+}
+.show {
+  font-size: 1em;
+  width: 180px;
+  position: absolute;
+  right: 20rem;
+}
+.select {
+  height: 35px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  outline: none;
+}
+
+.select option {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: #3e3e3e;
 }

@@ -54,7 +54,6 @@ createPokemon = async (pokemonCreate) => {
 
   const newPoke = await Pokemon.create({
     name,
-    types,
     hp,
     attack,
     specialAttack,

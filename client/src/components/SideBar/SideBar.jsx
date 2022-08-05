@@ -1,9 +1,16 @@
 import React from 'react';
+import s from './SideBar.module.css';
 import SelectFilter from '../SelectFilter/SelectFilter';
 
-const SideBar = ({ filteredTypes, filteredSources, handleSelectFilter }) => {
+const SideBar = ({
+  filteredTypes,
+  filteredSources,
+  handleSelectFilter,
+  pagination,
+  onPagination,
+}) => {
   return (
-    <div>
+    <div className={s.container}>
       <SelectFilter
         name="types"
         handleSelect={handleSelectFilter}
