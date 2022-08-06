@@ -73,7 +73,7 @@ getTypesFromApi = async () => {
 getEvolutionChainFromApi = async (id) => {
   const evolutionChain = [];
   let evolutions = await axios
-    .get(`${PATHPokemon}${id}`)
+    .get(`${PATHPokemon}/${id}`)
     .then((response) => axios.get(response.data.species.url))
     .then((response) => axios.get(response.data['evolution_chain'].url))
     .then((response) => {
@@ -90,6 +90,7 @@ getEvolutionChainFromApi = async (id) => {
     evolutionChain.push(evolutions['evolves_to'][0].species.name);
     evolutions = evolutions['evolves_to'][0];
   }
+
   return evolutionChain;
 };
 

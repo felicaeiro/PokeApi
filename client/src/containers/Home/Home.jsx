@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import s from './Home.module.css';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import {
-  getAllPokemon,
-  getAllTypes,
-  setPagination,
-  setSort,
-} from '../../redux/actions';
+import { getAllPokemon, getAllTypes, setSort } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/Loading/Loading';
 import VisiblePokemons from '../VisiblePokemons';

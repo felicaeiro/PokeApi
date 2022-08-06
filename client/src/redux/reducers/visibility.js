@@ -3,6 +3,7 @@ import {
   SET_PAGINATION,
   SET_FILTER,
   REMOVE_FILTER,
+  SET_STATS_FILTER,
 } from '../constants/index';
 
 const initialState = {
@@ -13,6 +14,13 @@ const initialState = {
 
 const visibility = (state = initialState, action) => {
   switch (action.type) {
+    case SET_STATS_FILTER:
+      return {
+        ...state,
+        filter: state.filter
+          .filter((f) => action.payload.every((a) => f.key !== a.key))
+          .concat(action.payload),
+      };
     case SET_FILTER:
       return {
         ...state,
@@ -24,13 +32,13 @@ const visibility = (state = initialState, action) => {
         filter: state.filter.filter((f) => f.value !== action.payload.value),
       };
     case SET_PAGINATION: {
-      //action.payload = { currentPage: number, pokesPerPage: 12 }
       return {
         ...state,
         pagination: {
           ...state.pagination,
           currentPage: action.payload.currentPage,
-          pokesPerPage: action.payload.pokesPerPage,
+          pokesPerPage:
+            action.payload.pokesPerPage || state.pagination.pokesPerPage,
         },
       };
     }

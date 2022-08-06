@@ -13,6 +13,7 @@ const Pokemons = ({
   filteredSources,
   onPagination,
   handleSelectFilter,
+  handleRangeFilter,
 }) => {
   return (
     <div className={s.container}>
@@ -21,6 +22,7 @@ const Pokemons = ({
           filteredTypes={filteredTypes}
           filteredSources={filteredSources}
           handleSelectFilter={handleSelectFilter}
+          handleRangeFilter={handleRangeFilter}
         />
         <div className={s.pokemons}>
           {pokesToRender.map((p) => (

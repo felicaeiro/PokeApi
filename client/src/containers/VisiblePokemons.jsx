@@ -1,6 +1,11 @@
 import { connect } from 'react-redux';
 import Pokemons from '../components/Pokemons/Pokemons';
-import { removeFilter, setFilter, setPagination } from '../redux/actions';
+import {
+  removeFilter,
+  setFilter,
+  setPagination,
+  setStatFilter,
+} from '../redux/actions';
 
 const filterPokemons = (pokemons, filters) => {
   const result = pokemons.filter((poke) =>
@@ -10,6 +15,8 @@ const filterPokemons = (pokemons, filters) => {
       }
       if (filter.key === 'source') {
         return poke[filter.key] === filter.value;
+      } else {
+        return poke[filter.key] <= filter.max && poke[filter.key] >= filter.min;
       }
       return true;
     })
@@ -108,7 +115,10 @@ const mapDispatchToProps = (dispatch) => {
       } else {
         dispatch(removeFilter(filter));
       }
-      dispatch(setPagination({ currentPage: 1, pokesPerPage: 12 }));
+      dispatch(setPagination({ currentPage: 1 }));
+    },
+    handleRangeFilter: (filter) => {
+      dispatch(setStatFilter(filter));
     },
   };
 };

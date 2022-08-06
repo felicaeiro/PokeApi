@@ -11,6 +11,7 @@ import {
   LOADING,
   HANDLE_ERROR,
   REMOVE_FILTER,
+  SET_STATS_FILTER,
 } from '../constants/index';
 
 export const handleError = (error) => {
@@ -97,6 +98,10 @@ export const setFilter = (filter) => {
 
 export const removeFilter = (filter) => {
   return { type: REMOVE_FILTER, payload: filter };
+};
+
+export const setStatFilter = (filter) => {
+  return { type: SET_STATS_FILTER, payload: filter };
 };
 
 export const setSort = (sort) => {
