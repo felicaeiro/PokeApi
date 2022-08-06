@@ -70,9 +70,33 @@ getTypesFromApi = async () => {
   return types;
 };
 
+getEvolutionChainFromApi = async (id) => {
+  const evolutionChain = [];
+  let evolutions = await axios
+    .get(`${PATHPokemon}${id}`)
+    .then((response) => axios.get(response.data.species.url))
+    .then((response) => axios.get(response.data['evolution_chain'].url))
+    .then((response) => {
+      evolutionChain.push(response.data.chain.species.name);
+      return response.data.chain;
+    })
+    .catch((error) => {
+      error.status = 404;
+      error.message = `The id doesn't belong to any Pokemon`;
+      throw error;
+    });
+
+  while (evolutions['evolves_to'].length > 0) {
+    evolutionChain.push(evolutions['evolves_to'][0].species.name);
+    evolutions = evolutions['evolves_to'][0];
+  }
+  return evolutionChain;
+};
+
 module.exports = {
   getPokemonsFromAPI,
   getPokemonUrl,
   getPokemonByIdFromApi,
   getTypesFromApi,
+  getEvolutionChainFromApi,
 };
