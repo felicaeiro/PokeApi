@@ -1,30 +1,43 @@
-.container {
+.flipCard {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem auto;
+  background-color: transparent;
   min-width: 550px;
   max-width: 550px;
   width: 550px;
-  max-height: 230px;
-  min-height: 230px;
-  margin: 1.5rem auto;
-  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  max-height: 245px;
+  min-height: 245px;
+}
+.container {
   border-radius: 20px;
-  display: flex;
-  align-items: center;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
-  transition: background-color 0.3s;
-  transition: box-shadow 0.3s;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+.flipCard:hover .container {
+  transform: rotateX(180deg);
+}
+.front,
+.back {
+  border-radius: 20px;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.back {
+  color: white;
+  opacity: 0.7;
+  transform: rotateX(180deg);
 }
 
-.container:hover {
-  background-color: rgb(214, 212, 212);
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-    rgba(0, 0, 0, 0.22) 0px 10px 10px;
-}
 .pokeImage {
-  transition: height 0.3s;
   position: absolute;
-}
-.container:hover .pokeImage {
-  height: 245px;
 }
 
 .content {
@@ -52,6 +65,37 @@
 ul {
   list-style-type: none;
 }
-.button {
-  margin-left: 150px;
+
+.backContent {
+  padding: 0.5rem 1.5rem;
+}
+.top {
+  display: flex;
+  align-items: flex-end;
+  border-bottom: 2px solid white;
+  width: 45%;
+  margin-bottom: 10px;
+}
+.top p {
+  margin-right: 6px;
+  margin-bottom: 3px;
+}
+.backTitle {
+  font-size: 1.4rem;
+  margin: 27px 3px 0px;
+}
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.stat {
+  display: flex;
+  align-items: flex-end;
+}
+.stat p,
+.stat h3 {
+  margin: 0px;
+  margin-left: 10px;
+  margin-top: 5px;
 }

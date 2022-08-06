@@ -28,6 +28,14 @@ const Pokemons = ({
               id={p.id}
               key={p.id}
               name={p.name}
+              hp={p.hp}
+              attack={p.attack}
+              specialAttack={p.specialAttack}
+              defense={p.defense}
+              specialDefense={p.specialDefense}
+              speed={p.speed}
+              weight={p.weight}
+              height={p.height}
               types={p.types}
               img={p.img ? p.img : card}
             />
