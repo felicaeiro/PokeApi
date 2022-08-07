@@ -4,12 +4,15 @@ import {
   SET_FILTER,
   REMOVE_FILTER,
   SET_STATS_FILTER,
+  SEARCH_BY_NAME,
+  RESET_FILTERS,
 } from '../constants/index';
 
 const initialState = {
   filter: [],
   sort: { attribute: 'id', order: 'asc' },
   pagination: { currentPage: 1, pokesPerPage: 12 },
+  pokeSearch: '',
 };
 
 const visibility = (state = initialState, action) => {
@@ -20,11 +23,13 @@ const visibility = (state = initialState, action) => {
         filter: state.filter
           .filter((f) => action.payload.every((a) => f.key !== a.key))
           .concat(action.payload),
+        pagination: { ...state.pagination, currentPage: 1 },
       };
     case SET_FILTER:
       return {
         ...state,
         filter: state.filter.concat([action.payload]),
+        pagination: { ...state.pagination, currentPage: 1 },
       };
     case REMOVE_FILTER:
       return {
@@ -37,8 +42,7 @@ const visibility = (state = initialState, action) => {
         pagination: {
           ...state.pagination,
           currentPage: action.payload.currentPage,
-          pokesPerPage:
-            action.payload.pokesPerPage || state.pagination.pokesPerPage,
+          pokesPerPage: action.payload.pokesPerPage,
         },
       };
     }
@@ -49,6 +53,18 @@ const visibility = (state = initialState, action) => {
         sort: action.payload,
       };
     }
+    case SEARCH_BY_NAME:
+      return {
+        ...state,
+        pokeSearch: action.payload,
+        pagination: { ...state.pagination, currentPage: 1 },
+      };
+    case RESET_FILTERS:
+      return {
+        ...state,
+        filter: [],
+        pokeSearch: '',
+      };
     default:
       return state;
   }

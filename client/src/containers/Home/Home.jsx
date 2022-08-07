@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 import s from './Home.module.css';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { getAllPokemon, getAllTypes, setSort } from '../../redux/actions';
+import {
+  getAllPokemon,
+  getAllTypes,
+  getPokeByName,
+  setSort,
+} from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/Loading/Loading';
 import VisiblePokemons from '../VisiblePokemons';
@@ -18,7 +23,7 @@ export default function Home() {
 
   const {
     data: { allPokemon, loading, error },
-    visibility: { sort },
+    visibility: { sort, pokeSearch },
   } = useSelector((state) => state);
 
   allPokemon.forEach((x) =>
@@ -33,14 +38,16 @@ export default function Home() {
       sorter = { ...sorter, order: e.target.value };
     dispatch(setSort(sorter));
   };
-
+  const handleSearch = (search) => {
+    dispatch(getPokeByName(search));
+  };
   if (loading) return <Loading />;
   if (error) return <Error />;
 
   return (
     <div className={s.container}>
       <div className={s.topBar}>
-        <SearchBar allPokemon={allPokemon} />
+        <SearchBar pokeSearch={pokeSearch} handleSearch={handleSearch} />
         <Sorter handleSelect={handleSelectSorter} sort={sort} />
       </div>
       <VisiblePokemons />

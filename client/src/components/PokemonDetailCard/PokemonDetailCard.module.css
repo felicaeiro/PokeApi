@@ -72,3 +72,7 @@
   -webkit-appearance: none;
   appearance: none;
 }
+.evolution {
+  display: flex;
+  justify-content: space-evenly;
+}

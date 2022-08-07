@@ -2,13 +2,15 @@ import { connect } from 'react-redux';
 import Pokemons from '../components/Pokemons/Pokemons';
 import {
   removeFilter,
+  resetFilters,
   setFilter,
   setPagination,
   setStatFilter,
 } from '../redux/actions';
 
-const filterPokemons = (pokemons, filters) => {
-  const result = pokemons.filter((poke) =>
+const filterPokemons = (pokemons, search, filters) => {
+  let result = pokemons.filter((p) => p.name.includes(search));
+  result = result.filter((poke) =>
     filters.every((filter) => {
       if (filter.key === 'types') {
         return poke.types.includes(filter.value);
@@ -85,6 +87,7 @@ const filterSources = (allPokemon, filteredPokemons, filters) => {
 const mapStateToProps = (state) => {
   const filteredPokemons = filterPokemons(
     state.data.allPokemon,
+    state.visibility.pokeSearch,
     state.visibility.filter
   );
   const sortedPokemons = sortPokemons(filteredPokemons, state.visibility.sort);
@@ -102,6 +105,7 @@ const mapStateToProps = (state) => {
     filteredPokemons,
     state.visibility.filter
   );
+
   return {
     filteredTypes,
     filteredSources,
@@ -120,10 +124,12 @@ const mapDispatchToProps = (dispatch) => {
       } else {
         dispatch(removeFilter(filter));
       }
-      dispatch(setPagination({ currentPage: 1 }));
     },
     handleRangeFilter: (filter) => {
       dispatch(setStatFilter(filter));
+    },
+    reset: () => {
+      dispatch(resetFilters());
     },
   };
 };

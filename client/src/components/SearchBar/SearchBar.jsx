@@ -1,49 +1,23 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
 import s from './SearchBar.module.css';
 
-export default function SearchBar({ allPokemon }) {
-  const [poke, setPoke] = useState('');
-  const [notValid, setNotValid] = useState('');
-
-  const history = useHistory();
-
+export default function SearchBar({ pokeSearch, handleSearch }) {
   const handleChange = (e) => {
-    setPoke(e.target.value);
-    setNotValid('');
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (poke === '') setNotValid('A Pokémon name is required');
-    else {
-      const searchedPoke = allPokemon.filter(
-        (p) => p.name === poke.toLowerCase()
-      );
-      if (searchedPoke.length) {
-        history.push(`/home/search/${poke}`);
-      } else setNotValid(`The Pokémon ${poke} doesn't exist`);
-    }
+    handleSearch(e.target.value.toLowerCase());
   };
 
   return (
     <div className={s.searchWrapper}>
-      <form
-        className={(notValid && s.dangerBorder) || s.inputHolder}
-        onSubmit={handleSubmit}
-      >
+      <form className={s.inputHolder}>
         <input
           type="text"
-          value={poke}
+          value={pokeSearch}
           onChange={handleChange}
           placeholder="Enter Pokemon name..."
-          className={`${s.input} `}
+          className={s.input}
         />
-        <button type="submit" className={s.searchIcon}>
-          <i className="fa-solid fa-magnifying-glass" />
-        </button>
+        <i className={`fa-solid fa-magnifying-glass ${s.searchIcon}`} />
       </form>
-      {notValid && <span className={`${s.danger}`}>{notValid}</span>}
     </div>
   );
 }

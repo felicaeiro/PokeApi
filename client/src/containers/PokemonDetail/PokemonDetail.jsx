@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/Loading/Loading';
 import Error from '../../components/Error/Error';
-import { getPokemonDetail } from '../../redux/actions';
+import { getEvolutionChain, getPokemonDetail } from '../../redux/actions';
 import s from './PokemonDetail.module.css';
 import { Link } from 'react-router-dom';
 import PokemonDetailCard from '../../components/PokemonDetailCard/PokemonDetailCard';
@@ -13,10 +13,12 @@ export default function PokemonDetail({ match }) {
 
   useEffect(() => {
     dispatch(getPokemonDetail(idPokemon));
+    dispatch(getEvolutionChain(idPokemon));
   }, [dispatch, idPokemon]);
 
   const {
     pokemonDetail: poke,
+    evolutionChain,
     loading,
     error,
   } = useSelector((state) => state.data);
@@ -39,6 +41,7 @@ export default function PokemonDetail({ match }) {
           specialDefense={poke.specialDefense}
           speed={poke.speed}
           img={poke.img}
+          evolutionChain={evolutionChain}
         />
       )}
       <div className={`${s.button} ${poke.id && s[poke.types[0]]}`}>

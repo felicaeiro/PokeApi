@@ -15,6 +15,7 @@ export default function PokemonDetailCard({
   specialDefense,
   speed,
   img,
+  evolutionChain,
 }) {
   function importAll(r) {
     let images = {};
@@ -108,6 +109,32 @@ export default function PokemonDetailCard({
           max="200"
         />
       </div>
+      {evolutionChain && (
+        <div>
+          <h3>Evolution Chain</h3>
+          {evolutionChain.map((p) => (
+            <div key={p.id} className={s.evolution}>
+              <img src={p.img} alt={p.name} height="50px" />
+              <h5>
+                {p.name.charAt(0).toUpperCase() +
+                  p.name.substring(1).toLowerCase()}
+              </h5>
+              <ul className={s.typesList}>
+                {p.types.map((t, i) => (
+                  <li className={s.type} key={i}>
+                    <img
+                      src={typeIcons[`${t}.png`].default}
+                      alt="type"
+                      height="30px"
+                    />
+                    {t.charAt(0).toUpperCase() + t.substring(1)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

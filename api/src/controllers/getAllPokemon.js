@@ -4,21 +4,11 @@ const { getPokemonsFromAPI } = require('../services/pokeApi');
 module.exports = {
   getAllPokemon: async function (req, res, next) {
     try {
-      let { name } = req.query;
-
       const pokemonsFromApi = await getPokemonsFromAPI();
       const pokemonsFromDb = await getPokemonsFromDB();
 
       let result = [...pokemonsFromApi, ...pokemonsFromDb];
-      if (name) {
-        name = name.toLowerCase();
-        result = result.filter((poke) => poke.name === name);
-        if (!result.length) {
-          const error = new Error(`The Pokemon ${name} doesn't exist`);
-          error.status = 404;
-          throw error;
-        }
-      }
+
       res.json(result);
     } catch (error) {
       next(error);

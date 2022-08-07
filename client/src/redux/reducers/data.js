@@ -1,18 +1,18 @@
 import {
   GET_ALL_POKEMONS,
   GET_ALL_TYPES,
-  SEARCH_BY_NAME,
   GET_POKEMON_DETAIL,
   LOADING,
   HANDLE_ERROR,
   CREATE_POKEMON,
+  GET_EVOLUTION_CHAIN,
 } from '../constants/index';
 
 const initialState = {
   allPokemon: [],
   types: [],
-  search: {},
   pokemonDetail: {},
+  evolutionChain: [],
   loading: false,
   error: null,
 };
@@ -38,17 +38,16 @@ const data = (state = initialState, action) => {
         loading: false,
         error: null,
       };
-    case SEARCH_BY_NAME:
-      return {
-        ...state,
-        search: action.payload,
-        loading: false,
-        error: null,
-      };
     case GET_POKEMON_DETAIL:
       return {
         ...state,
         pokemonDetail: action.payload,
+        error: null,
+      };
+    case GET_EVOLUTION_CHAIN:
+      return {
+        ...state,
+        evolutionChain: action.payload,
         loading: false,
         error: null,
       };

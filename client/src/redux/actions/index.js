@@ -12,6 +12,8 @@ import {
   HANDLE_ERROR,
   REMOVE_FILTER,
   SET_STATS_FILTER,
+  RESET_FILTERS,
+  GET_EVOLUTION_CHAIN,
 } from '../constants/index';
 
 export const handleError = (error) => {
@@ -62,17 +64,17 @@ export const createPokemon = (data) => {
   };
 };
 
-export const getPokeByName = (name) => {
+export const getEvolutionChain = (id) => {
   return function (dispatch) {
     dispatch(loading());
     axios
-      .get(`http://localhost:3001/pokemons?name=${name}`)
+      .get(`http://localhost:3001/evolutionChain/${id}`)
       .then((response) =>
-        dispatch({ type: SEARCH_BY_NAME, payload: response.data[0] })
+        dispatch({ type: GET_EVOLUTION_CHAIN, payload: response.data })
       )
       .catch((error) => {
         dispatch(handleError(error));
-        console.error('Unable to getPokeByName: ' + error.message);
+        console.error('Unable to getEvolutionChain: ' + error.message);
       });
   };
 };
@@ -92,6 +94,10 @@ export const getPokemonDetail = (idPokemon) => {
   };
 };
 
+export const getPokeByName = (name) => {
+  return { type: SEARCH_BY_NAME, payload: name };
+};
+
 export const setFilter = (filter) => {
   return { type: SET_FILTER, payload: filter };
 };
@@ -103,7 +109,9 @@ export const removeFilter = (filter) => {
 export const setStatFilter = (filter) => {
   return { type: SET_STATS_FILTER, payload: filter };
 };
-
+export const resetFilters = () => {
+  return { type: RESET_FILTERS };
+};
 export const setSort = (sort) => {
   return { type: SET_SORTER, payload: sort };
 };

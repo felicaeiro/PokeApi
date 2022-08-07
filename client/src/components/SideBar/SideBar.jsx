@@ -8,6 +8,7 @@ const SideBar = ({
   filteredSources,
   handleSelectFilter,
   handleRangeFilter,
+  reset,
 }) => {
   const [showStatsFilters, setShowStatsFilters] = useState(false);
 
@@ -18,19 +19,6 @@ const SideBar = ({
   let filterStats = [];
 
   const handleOnClick = () => {
-    handleRangeFilter(filterStats);
-  };
-  const handleReset = () => {
-    filterStats = [
-      { key: 'hp', min: 1, max: 255 },
-      { key: 'attack', min: 1, max: 200 },
-      { key: 'specialAttack', min: 1, max: 200 },
-      { key: 'defense', min: 1, max: 255 },
-      { key: 'specialDefense', min: 1, max: 255 },
-      { key: 'speed', min: 1, max: 200 },
-      { key: 'weight', min: 0, max: 1000 },
-      { key: 'height', min: 0, max: 20 },
-    ];
     handleRangeFilter(filterStats);
   };
   const handleOnChange = (filter) => {
@@ -121,7 +109,7 @@ const SideBar = ({
             onChange={handleOnChange}
           />
           <button onClick={handleOnClick}>Apply filters</button>
-          <button onClick={handleReset}>Reset filters</button>
+          <button onClick={() => reset()}>Reset filters</button>
         </div>
       )}
     </div>

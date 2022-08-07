@@ -71,7 +71,7 @@ getTypesFromApi = async () => {
 };
 
 getEvolutionChainFromApi = async (id) => {
-  const evolutionChain = [];
+  let evolutionChain = [];
   let evolutions = await axios
     .get(`${PATHPokemon}/${id}`)
     .then((response) => axios.get(response.data.species.url))
@@ -90,6 +90,21 @@ getEvolutionChainFromApi = async (id) => {
     evolutionChain.push(evolutions['evolves_to'][0].species.name);
     evolutions = evolutions['evolves_to'][0];
   }
+
+  evolutionChain = await Promise.all(
+    evolutionChain.map((x) =>
+      getPokemonByIdFromApi(x).then((response) => ({
+        id: response.id,
+        name: response.name,
+        types: response.types,
+        img: response.img,
+      }))
+    )
+  ).catch((error) => {
+    error.status = 502;
+    error.message = 'Unable to get pokemons from API';
+    throw error;
+  });
 
   return evolutionChain;
 };

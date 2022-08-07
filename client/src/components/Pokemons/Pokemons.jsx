@@ -15,21 +15,8 @@ const Pokemons = ({
   onPagination,
   handleSelectFilter,
   handleRangeFilter,
+  reset,
 }) => {
-  const handleReset = () => {
-    const filterStats = [
-      { key: 'hp', min: 1, max: 255 },
-      { key: 'attack', min: 1, max: 200 },
-      { key: 'specialAttack', min: 1, max: 200 },
-      { key: 'defense', min: 1, max: 255 },
-      { key: 'specialDefense', min: 1, max: 255 },
-      { key: 'speed', min: 1, max: 200 },
-      { key: 'weight', min: 0, max: 1000 },
-      { key: 'height', min: 0, max: 20 },
-    ];
-    handleRangeFilter(filterStats);
-  };
-
   return (
     <div className={s.container}>
       <div className={s.topContainer}>
@@ -38,6 +25,7 @@ const Pokemons = ({
           filteredSources={filteredSources}
           handleSelectFilter={handleSelectFilter}
           handleRangeFilter={handleRangeFilter}
+          reset={reset}
         />
         {pokesToRender.length ? (
           <div className={s.pokemons}>
@@ -63,7 +51,7 @@ const Pokemons = ({
           <div className={s.notFound}>
             <p>No Pokémons match your search</p>
             <img src={notFound} alt="Pokémon not found" height="250px" />
-            <button onClick={handleReset}>Reset filters</button>
+            <button onClick={() => reset()}>Reset filters</button>
           </div>
         )}
       </div>
