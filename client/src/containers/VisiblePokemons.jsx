@@ -18,7 +18,6 @@ const filterPokemons = (pokemons, filters) => {
       } else {
         return poke[filter.key] <= filter.max && poke[filter.key] >= filter.min;
       }
-      return true;
     })
   );
   return result;
@@ -40,13 +39,19 @@ const getPokesPerPage = (allPokemon, { currentPage, pokesPerPage }) => {
   return pokesToRender;
 };
 
-const filterTypes = (allPokemon, types, filters) => {
+const filterTypes = (filteredPokemons, types, filters) => {
   types.forEach((t) => (t.checked = filters.some((f) => f.value === t.name)));
-  return types.filter((t) => {
-    return allPokemon.some((p) => {
+
+  const filteredTypes = types.filter((t) => {
+    return filteredPokemons.some((p) => {
       return p.types.includes(t.name);
     });
   });
+
+  if (!filteredTypes.length) filteredTypes.hidden = true;
+  else filteredTypes.hidden = false;
+
+  return filteredTypes;
 };
 
 const filterSources = (allPokemon, filteredPokemons, filters) => {

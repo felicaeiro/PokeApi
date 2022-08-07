@@ -103,7 +103,7 @@
 /* For Firefox browsers */
 input[type='range'] ::-moz-range-thumb {
   background-color: #f1f5f7;
-  background-image: url('../../img/pokebola.png');
+  background-image: url('../../img/jigglypuff.png');
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;

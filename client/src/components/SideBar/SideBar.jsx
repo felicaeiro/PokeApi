@@ -10,16 +10,7 @@ const SideBar = ({
   handleRangeFilter,
 }) => {
   const [showStatsFilters, setShowStatsFilters] = useState(false);
-  const [filterStatsState, setFilterStats] = useState([
-    { key: 'hp', min: 1, max: 255 },
-    { key: 'attack', min: 1, max: 200 },
-    { key: 'specialAttack', min: 1, max: 200 },
-    { key: 'defense', min: 1, max: 255 },
-    { key: 'specialDefense', min: 1, max: 255 },
-    { key: 'speed', min: 1, max: 200 },
-    { key: 'weight', min: 1, max: 1000 },
-    { key: 'height', min: 1, max: 20 },
-  ]);
+
   const handleDisplay = () => {
     setShowStatsFilters(!showStatsFilters);
   };

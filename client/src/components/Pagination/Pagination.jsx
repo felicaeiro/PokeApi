@@ -76,7 +76,7 @@ const Pagination = ({ totalPokes, pagination, onPagination }) => {
             ...{totalPages}
           </button>
         )}
-        {currentPage === totalPages ? (
+        {currentPage === totalPages || totalPages === 0 ? (
           <></>
         ) : (
           <button
@@ -89,24 +89,28 @@ const Pagination = ({ totalPokes, pagination, onPagination }) => {
           </button>
         )}
       </div>
-      <div className={s.show}>
-        <span>
-          Show{' '}
-          <select
-            defaultValue={pokesPerPage}
-            onChange={(e) =>
-              onPagination({ currentPage: 1, pokesPerPage: e.target.value })
-            }
-            className={s.select}
-          >
-            <option label="6" value={6} />
-            <option label="12" value={12} />
-            <option label="20" value={20} />
-            <option label="50" value={50} />
-          </select>{' '}
-          Pokémons
-        </span>
-      </div>
+      {totalPages === 0 ? (
+        <></>
+      ) : (
+        <div className={s.show}>
+          <span>
+            Show{' '}
+            <select
+              defaultValue={pokesPerPage}
+              onChange={(e) =>
+                onPagination({ currentPage: 1, pokesPerPage: e.target.value })
+              }
+              className={s.select}
+            >
+              <option label="6" value={6} />
+              <option label="12" value={12} />
+              <option label="20" value={20} />
+              <option label="50" value={50} />
+            </select>{' '}
+            Pokémons
+          </span>
+        </div>
+      )}
     </div>
   );
 };
