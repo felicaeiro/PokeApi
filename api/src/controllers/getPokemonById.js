@@ -5,7 +5,7 @@ module.exports = {
   getPokemonById: async function (req, res, next) {
     const { idPokemon } = req.params;
     try {
-      if (Number(idPokemon) && idPokemon < 152) {
+      if (Number(idPokemon)) {
         res.json(await getPokemonByIdFromApi(idPokemon));
       } else {
         res.json(await getPokemonByIdFromDb(idPokemon));

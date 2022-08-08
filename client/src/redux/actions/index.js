@@ -24,7 +24,7 @@ export const getAllPokemon = () => {
   return function (dispatch) {
     dispatch(loading());
     axios
-      .get('http://localhost:3001/pokemons')
+      .get('/pokemons')
       .then((response) =>
         dispatch({ type: GET_ALL_POKEMONS, payload: response.data })
       )
@@ -38,7 +38,7 @@ export const getAllPokemon = () => {
 export const getAllTypes = () => {
   return function (dispatch) {
     axios
-      .get('http://localhost:3001/types')
+      .get('/types')
       .then((response) =>
         dispatch({ type: GET_ALL_TYPES, payload: response.data })
       )
@@ -53,7 +53,7 @@ export const createPokemon = (data) => {
   return function (dispatch) {
     dispatch(loading());
     axios
-      .post('http://localhost:3001/pokemons', data)
+      .post('/pokemons', data)
       .then((response) =>
         dispatch({ type: CREATE_POKEMON, payload: response.data })
       )
@@ -68,7 +68,7 @@ export const getEvolutionChain = (id) => {
   return function (dispatch) {
     dispatch(loading());
     axios
-      .get(`http://localhost:3001/evolutionChain/${id}`)
+      .get(`/evolutionChain/${id}`)
       .then((response) =>
         dispatch({ type: GET_EVOLUTION_CHAIN, payload: response.data })
       )
@@ -83,7 +83,7 @@ export const getPokemonDetail = (idPokemon) => {
   return function (dispatch) {
     dispatch(loading());
     axios
-      .get(`http://localhost:3001/pokemons/${idPokemon}`)
+      .get(`/pokemons/${idPokemon}`)
       .then((response) =>
         dispatch({ type: GET_POKEMON_DETAIL, payload: response.data })
       )

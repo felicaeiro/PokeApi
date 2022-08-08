@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import card from '../../img/card.png';
 import StatsRanges from '../StatsRanges/StatsRanges';
 import s from './PokemonDetailCard.module.css';
@@ -110,29 +111,52 @@ export default function PokemonDetailCard({
         />
       </div>
       {evolutionChain && (
-        <div>
-          <h3>Evolution Chain</h3>
-          {evolutionChain.map((p) => (
-            <div key={p.id} className={s.evolution}>
-              <img src={p.img} alt={p.name} height="50px" />
-              <h5>
-                {p.name.charAt(0).toUpperCase() +
-                  p.name.substring(1).toLowerCase()}
-              </h5>
-              <ul className={s.typesList}>
-                {p.types.map((t, i) => (
-                  <li className={s.type} key={i}>
+        <div className={s.evContainer}>
+          <span>
+            <h3>Evolution Chain</h3>
+            {evolutionChain.length === 1 ? (
+              <h5>This Pokémon doesn't evolve</h5>
+            ) : (
+              <></>
+            )}
+          </span>
+          <div className={s.evContent}>
+            {evolutionChain.map((p, i) => (
+              <>
+                <div key={p.id} className={s.evolution}>
+                  <Link to={`/pokemonDetail/${p.id}`}>
                     <img
-                      src={typeIcons[`${t}.png`].default}
-                      alt="type"
-                      height="30px"
+                      className={s.pokeImg}
+                      src={p.img}
+                      alt={p.name}
+                      height="150px"
                     />
-                    {t.charAt(0).toUpperCase() + t.substring(1)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+                  </Link>
+                  <h3>
+                    {p.name.charAt(0).toUpperCase() +
+                      p.name.substring(1).toLowerCase()}
+                  </h3>
+
+                  <ul className={s.typesList}>
+                    {p.types.map((t, i) => (
+                      <li
+                        className={s.evType}
+                        style={{ backgroundColor: `var(--${t})` }}
+                        key={i}
+                      >
+                        {t.charAt(0).toUpperCase() + t.substring(1)}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {evolutionChain.length - 1 === i ? (
+                  <></>
+                ) : (
+                  <i class="fa-solid fa-right-long fa-2xl" />
+                )}
+              </>
+            ))}
+          </div>
         </div>
       )}
     </div>
