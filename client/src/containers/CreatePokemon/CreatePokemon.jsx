@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPokemon, getAllPokemon, getAllTypes } from '../../redux/actions';
+import {
+  createPokemon,
+  deletePokemon,
+  getAllPokemon,
+  getAllTypes,
+  resetFilters,
+} from '../../redux/actions';
 import s from './CreatePokemon.module.css';
 import SelectStats from '../../components/SelectStats/SelectStats';
 import Loading from '../../components/Loading/Loading';
 import Error from '../../components/Error/Error';
 import CreatedPokemon from '../../components/CreatedPokemon/CreatedPokemon';
+import { useHistory } from 'react-router-dom';
 
 export default function CreatePokemon() {
   const dispatch = useDispatch();
+  const history = useHistory();
   useEffect(() => {
     dispatch(getAllPokemon());
     dispatch(getAllTypes());
   }, [dispatch]);
 
-  const { allPokemon, types, loading, error } = useSelector(
+  const { allPokemon, types, createdPokemon, loading, error } = useSelector(
     (state) => state.data
   );
 
@@ -207,11 +215,22 @@ export default function CreatePokemon() {
     });
     if (e.target.name === 'create') setSuccess(false);
   };
-
+  const handleDelete = (id) => {
+    dispatch(deletePokemon(id));
+    dispatch(resetFilters());
+    history.push('/home');
+    window.location.reload();
+  };
   if (loading) return <Loading />;
   if (error) return <Error />;
   if (success) {
-    return <CreatedPokemon poke={values} handleClick={handleCreatedClick} />;
+    return (
+      <CreatedPokemon
+        handleDelete={handleDelete}
+        poke={createdPokemon}
+        handleClick={handleCreatedClick}
+      />
+    );
   }
   return (
     <div className={s.container}>

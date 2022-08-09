@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import card from '../../img/card.png';
 import StatsRanges from '../StatsRanges/StatsRanges';
 import s from './PokemonDetailCard.module.css';
 
 export default function PokemonDetailCard({
+  id,
+  handleDelete,
   name,
   types,
   height,
@@ -18,6 +20,8 @@ export default function PokemonDetailCard({
   img,
   evolutionChain,
 }) {
+  const [deletePoke, setDeletePoke] = useState(false);
+
   function importAll(r) {
     let images = {};
     r.keys().map((item) => (images[item.replace('./', '')] = r(item)));
@@ -26,8 +30,47 @@ export default function PokemonDetailCard({
   const typeIcons = importAll(
     require.context('../../img/PokemonTypes', false, /\.png/)
   );
+  const handleDeleteClick = () => {
+    setDeletePoke(true);
+  };
   return (
     <div className={s.container}>
+      {!Number(id) ? (
+        <div className={s.buttons}>
+          <button onClick={handleDeleteClick}>
+            <i
+              className={`fa-solid fa-circle-minus fa-2xl ${s.delete} ${s.icon}`}
+            />
+            <span className={s.text}>Delete Pokémon</span>
+          </button>
+          <button>
+            <i className={`fa-solid fa-file-pen fa-2xl ${s.edit} ${s.icon}`} />
+            <span className={s.text}>Edit Pokémon</span>
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
+      {deletePoke ? (
+        <div className={s.deleteBackground}>
+          <div className={s.deleteContainer}>
+            <p>
+              Are you sure you want to delete{' '}
+              {name.charAt(0).toUpperCase() + name.substring(1).toLowerCase()}?
+            </p>
+            <span className={s.deleteOptions}>
+              <button onClick={() => handleDelete(id)} className={s.yes}>
+                Yes
+              </button>
+              <button onClick={() => setDeletePoke(false)} className={s.no}>
+                No
+              </button>
+            </span>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
       <div className={s.topInfo}>
         <img
           src={img ? img : card}
@@ -110,7 +153,7 @@ export default function PokemonDetailCard({
           max="200"
         />
       </div>
-      {evolutionChain && (
+      {evolutionChain.length ? (
         <div className={s.evContainer}>
           <span>
             <h3>Evolution Chain</h3>
@@ -158,6 +201,8 @@ export default function PokemonDetailCard({
             ))}
           </div>
         </div>
+      ) : (
+        <></>
       )}
     </div>
   );

@@ -6,12 +6,14 @@ import {
   HANDLE_ERROR,
   CREATE_POKEMON,
   GET_EVOLUTION_CHAIN,
+  DELETE_POKEMON,
 } from '../constants/index';
 
 const initialState = {
   allPokemon: [],
   types: [],
   pokemonDetail: {},
+  createdPokemon: {},
   evolutionChain: [],
   loading: false,
   error: null,
@@ -35,6 +37,7 @@ const data = (state = initialState, action) => {
     case CREATE_POKEMON:
       return {
         ...state,
+        createdPokemon: action.payload,
         loading: false,
         error: null,
       };
@@ -42,12 +45,19 @@ const data = (state = initialState, action) => {
       return {
         ...state,
         pokemonDetail: action.payload,
+        loading: false,
         error: null,
       };
     case GET_EVOLUTION_CHAIN:
       return {
         ...state,
         evolutionChain: action.payload,
+        loading: false,
+        error: null,
+      };
+    case DELETE_POKEMON:
+      return {
+        ...state,
         loading: false,
         error: null,
       };

@@ -23,8 +23,8 @@ const { populateTypes } = require('./src/startUp.js');
 
 // Syncing all the models at once.
 conn
-  .sync({ force: true })
-  .then(() => populateTypes())
+  .sync({ force: false })
+  // .then(() => populateTypes())
   .then(() => {
     server.listen(process.env.PORT, () => {
       console.log('%s listening at 3001'); // eslint-disable-line no-console

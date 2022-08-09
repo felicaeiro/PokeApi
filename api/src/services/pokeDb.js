@@ -17,7 +17,6 @@ fixTypes = (pokemon) => {
 
 getPokemonsFromDB = async () => {
   let allPokemons = await Pokemon.findAll({
-    attributes: ['id', 'name', 'attack'],
     ...includeTypes,
   }).catch((error) => {
     error.status = 503;

@@ -4,6 +4,7 @@ import {
   GET_ALL_TYPES,
   CREATE_POKEMON,
   GET_POKEMON_DETAIL,
+  DELETE_POKEMON,
   SEARCH_BY_NAME,
   SET_PAGINATION,
   SET_FILTER,
@@ -93,7 +94,20 @@ export const getPokemonDetail = (idPokemon) => {
       });
   };
 };
-
+export const deletePokemon = (id) => {
+  return function (dispatch) {
+    dispatch(loading);
+    axios
+      .delete(`http://localhost:3001/pokemons/${id}`)
+      .then((response) =>
+        dispatch({ type: DELETE_POKEMON, payload: response.data })
+      )
+      .catch((error) => {
+        dispatch(handleError(error));
+        console.error('Unable to createPokemon: ' + error.message);
+      });
+  };
+};
 export const getPokeByName = (name) => {
   return { type: SEARCH_BY_NAME, payload: name };
 };

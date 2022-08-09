@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import PokemonDetailCard from '../PokemonDetailCard/PokemonDetailCard';
 import s from './CreatedPokemon.module.css';
 
-export default function CreatedPokemon({ poke, handleClick }) {
+export default function CreatedPokemon({ poke, handleClick, handleDelete }) {
   return (
     <div>
       <PokemonDetailCard
+        id={poke.id}
         name={poke.name}
         types={poke.types}
         weight={poke.weight}
@@ -17,6 +18,8 @@ export default function CreatedPokemon({ poke, handleClick }) {
         defense={poke.defense}
         specialDefense={poke.specialDefense}
         speed={poke.speed}
+        evolutionChain={[]}
+        handleDelete={handleDelete}
       />
       <div className={`${s.button} ${s[poke.types[0]]}`}>
         <button name="create" onClick={(e) => handleClick(e)}>

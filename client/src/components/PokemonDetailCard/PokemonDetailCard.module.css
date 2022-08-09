@@ -73,7 +73,52 @@
   -webkit-appearance: none;
   appearance: none;
 }
-
+.deleteBackground {
+  top: 0;
+  left: 0;
+  background-color: rgb(128 128 128 / 50%);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 5;
+}
+.deleteContainer {
+  position: relative;
+  top: 50%;
+  background-color: white;
+  padding: 12px;
+  border: 2px solid rgb(62, 62, 62);
+  border-radius: 15px;
+  width: 20%;
+  margin: auto;
+}
+.deleteContainer p {
+  text-align: center;
+  margin: 0px;
+}
+.deleteOptions {
+  display: flex;
+  margin: 18px 48px 0px;
+  justify-content: space-evenly;
+}
+.deleteOptions button {
+  width: 3rem;
+  height: 2.5rem;
+  color: #3e3e3e;
+  font-family: 'Poppins', sans-serif;
+  border: 1px solid rgb(62, 62, 62);
+  border-radius: 50px;
+  transition: 0.3s;
+}
+.deleteOptions button:hover {
+  cursor: pointer;
+}
+.yes:hover {
+  background-color: rgba(255, 99, 71, 0.8);
+}
+.no:hover {
+  background-color: rgba(62, 62, 62, 0.5);
+}
 .evContainer {
   margin: 50px 75px;
   border: 3px solid #3e3e3e;
@@ -114,4 +159,46 @@
 .evContent i {
   margin: auto 0px;
   padding-bottom: 105px;
+}
+
+.buttons {
+  display: flex;
+  padding-top: 15px;
+  justify-content: flex-end;
+}
+.buttons button {
+  border: none;
+  text-decoration: none;
+  border-radius: 60px;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  width: auto;
+  max-width: 52px;
+  margin-right: 14px;
+  -webkit-transition: max-width 0.5s;
+  transition: max-width 0.5s;
+}
+.buttons button:hover {
+  max-width: 300px;
+  cursor: pointer;
+}
+.icon {
+  margin-right: 15px;
+  padding: 0px 8px;
+  display: flex;
+  align-items: center;
+}
+.text {
+  white-space: nowrap;
+  padding-right: 15px;
+  font-family: 'Poppins', sans-serif;
+  color: #3e3e3e;
+}
+.delete {
+  color: tomato;
+}
+.edit {
+  color: rgb(4, 4, 135);
 }
