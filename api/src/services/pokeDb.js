@@ -9,35 +9,35 @@ const includeTypes = {
   },
 };
 
-fixTypes = (pokemon) => {
+const fixTypes = (pokemon) => {
   pokemon = pokemon.get({ plain: true });
   pokemon.types = pokemon.types.map((t) => t.name);
   return pokemon;
 };
 
-getPokemonsFromDB = async () => {
+const getPokemonsFromDB = async () => {
   let allPokemons = await Pokemon.findAll({
     ...includeTypes,
   }).catch((error) => {
     error.status = 503;
-    error.message = 'Unable to get Pokemons from DB';
+    error.message = 'Unable to get Pokémons from DB';
     throw error;
   });
 
   return allPokemons.map((x) => fixTypes(x));
 };
 
-getPokemonByIdFromDb = async (id) => {
+const getPokemonByIdFromDb = async (id) => {
   const pokeById = await Pokemon.findByPk(id, includeTypes).catch((error) => {
     error.status = 404;
-    error.message = `The id doesn't belong to any Pokemon`;
+    error.message = `The id doesn't belong to any Pokémon`;
     throw error;
   });
 
   return fixTypes(pokeById);
 };
 
-createPokemon = async (pokemonCreate) => {
+const createPokemon = async (pokemonCreate) => {
   let {
     name,
     types,
@@ -84,18 +84,18 @@ createPokemon = async (pokemonCreate) => {
   return fixTypes(result);
 };
 
-getTypesFromDb = async (type) => {
+const getTypesFromDb = async (type) => {
   const condition = type ? { where: { name: type } } : {};
 
   const types = await Type.findAll(condition).catch((error) => {
     error.status = 503;
-    error.message = 'Unable to get Pokemon types';
+    error.message = 'Unable to get Pokémon types';
     throw error;
   });
   return types;
 };
 
-createTypes = async (types) => {
+const createTypes = async (types) => {
   const createdTypes = await Promise.all(
     types.map((x) => {
       return Type.create({ name: x.name });
@@ -108,10 +108,32 @@ createTypes = async (types) => {
   return createdTypes;
 };
 
+const updatePokemonInDb = async (pokemonUpdate) => {
+  const pokeToUpdate = await Pokemon.findByPk(pokemonUpdate.id);
+  await pokeToUpdate.update(pokemonUpdate);
+  if (pokemonUpdate.types) {
+    const types = await Type.findAll({ where: { name: pokemonUpdate.types } });
+    await pokeToUpdate.setTypes(types);
+  }
+
+  return await getPokemonByIdFromDb(pokemonUpdate.id);
+};
+
+const deletePokemonFrokmDb = async (id) => {
+  await Pokemon.destroy({ where: { id } }).catch((error) => {
+    error.status = 503;
+    error.message = 'Unable to get delete Pokémon';
+    throw error;
+  });
+  return id;
+};
+
 module.exports = {
   getPokemonsFromDB,
   getPokemonByIdFromDb,
   createPokemon,
   getTypesFromDb,
   createTypes,
+  updatePokemonInDb,
+  deletePokemonFrokmDb,
 };

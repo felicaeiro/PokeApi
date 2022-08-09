@@ -3,7 +3,7 @@ const axios = require('axios');
 const PATHPokemon = 'https://pokeapi.co/api/v2/pokemon';
 const PATHTypes = 'https://pokeapi.co/api/v2/type?limit=18';
 
-getPokemonsFromAPI = async () => {
+const getPokemonsFromAPI = async () => {
   let allPokemons = [];
   await axios
     .get(`${PATHPokemon}?limit=151`)
@@ -25,7 +25,7 @@ getPokemonsFromAPI = async () => {
   return allData;
 };
 
-getPokemonUrl = async (url) => {
+const getPokemonUrl = async (url) => {
   return await axios
     .get(url)
     .then((response) => ({
@@ -49,7 +49,7 @@ getPokemonUrl = async (url) => {
     });
 };
 
-getPokemonByIdFromApi = async (id) => {
+const getPokemonByIdFromApi = async (id) => {
   return await getPokemonUrl(`${PATHPokemon}/${id}`).catch((error) => {
     error.status = 404;
     error.message = `The id doesn't belong to any Pokemon`;
@@ -57,7 +57,7 @@ getPokemonByIdFromApi = async (id) => {
   });
 };
 
-getTypesFromApi = async () => {
+const getTypesFromApi = async () => {
   const types = await axios
     .get(PATHTypes)
     .then((response) => response.data.results)
@@ -70,7 +70,7 @@ getTypesFromApi = async () => {
   return types;
 };
 
-getEvolutionChainFromApi = async (id) => {
+const getEvolutionChainFromApi = async (id) => {
   let evolutionChain = [];
   let evolutions = await axios
     .get(`${PATHPokemon}/${id}`)

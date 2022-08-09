@@ -37,7 +37,7 @@ validatePokemonParameters = async (pokemonCreate) => {
   else return false;
 };
 
-validateName = async (name) => {
+const validateName = async (name) => {
   const errors = [];
   if (!name) {
     errors.push('Name is required to create Pokémon');
@@ -60,7 +60,7 @@ validateName = async (name) => {
   return errors;
 };
 
-validateTypes = async (types) => {
+const validateTypes = async (types) => {
   const errors = [];
   if (!types) {
     errors.push('Types is required to create Pokémon');
@@ -76,7 +76,14 @@ validateTypes = async (types) => {
   return errors;
 };
 
-validateStats = (hp, attack, specialAttack, defense, specialDefense, speed) => {
+const validateStats = (
+  hp,
+  attack,
+  specialAttack,
+  defense,
+  specialDefense,
+  speed
+) => {
   const errors = [];
   if (
     !hp ||
@@ -117,24 +124,24 @@ validateStats = (hp, attack, specialAttack, defense, specialDefense, speed) => {
   return errors;
 };
 
-validateWeight = (weight) => {
+const validateWeight = (weight) => {
   const errors = [];
   if (!weight) {
     errors.push('Weight is required to create Pokémon');
   }
   if (weight > 1000 || weight < 0.1 || !/^([0-9]*[.])?[0-9]+$/gi.test(weight)) {
-    errors.push(`Weight should be between 0.1 m. and 20 m.`);
+    errors.push(`Weight should be between 0.1 kg. and 1000 kg.`);
   }
   return errors;
 };
 
-validateHeight = (height) => {
+const validateHeight = (height) => {
   const errors = [];
   if (!height) {
     errors.push('Height is required to create Pokémon');
   }
   if (height > 20 || height < 0.1 || !/^([0-9]*[.])?[0-9]+$/gi.test(height)) {
-    errors.push(`Height should be between 0.1 kg. and 1000 kg.`);
+    errors.push(`Height should be between 0.1 m. and 20 m.`);
   }
   return errors;
 };

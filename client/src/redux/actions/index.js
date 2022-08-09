@@ -15,6 +15,8 @@ import {
   SET_STATS_FILTER,
   RESET_FILTERS,
   GET_EVOLUTION_CHAIN,
+  CLEAR_EVOLUTION_CHAIN,
+  UPDATE_POKEMON,
 } from '../constants/index';
 
 export const handleError = (error) => {
@@ -22,9 +24,9 @@ export const handleError = (error) => {
 };
 
 export const getAllPokemon = () => {
-  return function (dispatch) {
+  return async function (dispatch) {
     dispatch(loading());
-    axios
+    await axios
       .get('/pokemons')
       .then((response) =>
         dispatch({ type: GET_ALL_POKEMONS, payload: response.data })
@@ -37,8 +39,8 @@ export const getAllPokemon = () => {
 };
 
 export const getAllTypes = () => {
-  return function (dispatch) {
-    axios
+  return async function (dispatch) {
+    await axios
       .get('/types')
       .then((response) =>
         dispatch({ type: GET_ALL_TYPES, payload: response.data })
@@ -51,9 +53,9 @@ export const getAllTypes = () => {
 };
 
 export const createPokemon = (data) => {
-  return function (dispatch) {
+  return async function (dispatch) {
     dispatch(loading());
-    axios
+    await axios
       .post('/pokemons', data)
       .then((response) =>
         dispatch({ type: CREATE_POKEMON, payload: response.data })
@@ -66,9 +68,9 @@ export const createPokemon = (data) => {
 };
 
 export const getEvolutionChain = (id) => {
-  return function (dispatch) {
+  return async function (dispatch) {
     dispatch(loading());
-    axios
+    await axios
       .get(`/evolutionChain/${id}`)
       .then((response) =>
         dispatch({ type: GET_EVOLUTION_CHAIN, payload: response.data })
@@ -80,10 +82,14 @@ export const getEvolutionChain = (id) => {
   };
 };
 
+export const clearEvolutionChain = () => {
+  return { type: CLEAR_EVOLUTION_CHAIN };
+};
+
 export const getPokemonDetail = (idPokemon) => {
-  return function (dispatch) {
+  return async function (dispatch) {
     dispatch(loading());
-    axios
+    await axios
       .get(`/pokemons/${idPokemon}`)
       .then((response) =>
         dispatch({ type: GET_POKEMON_DETAIL, payload: response.data })
@@ -95,19 +101,35 @@ export const getPokemonDetail = (idPokemon) => {
   };
 };
 export const deletePokemon = (id) => {
-  return function (dispatch) {
+  return async function (dispatch) {
     dispatch(loading);
-    axios
-      .delete(`http://localhost:3001/pokemons/${id}`)
+    await axios
+      .delete(`/pokemons/${id}`)
       .then((response) =>
         dispatch({ type: DELETE_POKEMON, payload: response.data })
       )
       .catch((error) => {
         dispatch(handleError(error));
-        console.error('Unable to createPokemon: ' + error.message);
+        console.error('Unable to deletePokemon: ' + error.message);
       });
   };
 };
+
+export const updatePokemon = (data) => {
+  return async function (dispatch) {
+    dispatch(loading);
+    await axios
+      .put('/pokemons', data)
+      .then((response) =>
+        dispatch({ type: UPDATE_POKEMON, payload: response.data })
+      )
+      .catch((error) => {
+        dispatch(handleError(error));
+        console.error('Unable to updatePokemon: ' + error.message);
+      });
+  };
+};
+
 export const getPokeByName = (name) => {
   return { type: SEARCH_BY_NAME, payload: name };
 };

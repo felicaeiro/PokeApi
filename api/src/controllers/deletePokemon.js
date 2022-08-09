@@ -1,9 +1,12 @@
-const { Pokemon } = require('../db');
+const { deletePokemonFrokmDb } = require('../services/pokeDb');
 
 const deletePokemon = async (req, res, next) => {
-  const { idPokemon } = req.params;
-  await Pokemon.destroy({ where: { id: idPokemon } });
-  res.json('done');
+  try {
+    await deletePokemonFrokmDb(req.params.idPokemon);
+    res.json(`${req.params.idPokemon} deleted`);
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = { deletePokemon };

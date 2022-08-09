@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/Loading/Loading';
 import Error from '../../components/Error/Error';
 import {
+  clearEvolutionChain,
   deletePokemon,
+  getAllPokemon,
+  getAllTypes,
   getEvolutionChain,
   getPokemonDetail,
   resetFilters,
@@ -16,11 +19,16 @@ export default function PokemonDetail({ match }) {
   const { idPokemon } = match.params;
   const dispatch = useDispatch();
   const history = useHistory();
+
   useEffect(() => {
     dispatch(getPokemonDetail(idPokemon));
     if (Number(idPokemon)) {
       dispatch(getEvolutionChain(idPokemon));
+    } else {
+      dispatch(getAllTypes());
+      dispatch(getAllPokemon());
     }
+    return () => dispatch(clearEvolutionChain());
   }, [dispatch, idPokemon]);
 
   const {

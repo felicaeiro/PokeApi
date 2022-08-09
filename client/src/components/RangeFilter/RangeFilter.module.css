@@ -88,20 +88,17 @@
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
-  /* background-color: grey; */
   border: none;
   border-radius: 50%;
-  /* box-shadow: 0 0 1px 1px #ced4da; */
   cursor: pointer;
   height: 35px;
   width: 35px;
-  /* margin-top: 4px; */
   pointer-events: all;
   position: relative;
 }
 
 /* For Firefox browsers */
-input[type='range'] ::-moz-range-thumb {
+/* input[type='range'] ::-moz-range-thumb {
   background-color: #f1f5f7;
   background-image: url('../../img/jigglypuff.png');
   background-size: contain;
@@ -110,9 +107,8 @@ input[type='range'] ::-moz-range-thumb {
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  height: 18px;
-  width: 18px;
-  margin-top: 4px;
+  height: 35px;
+  width: 35px;
   pointer-events: all;
   position: relative;
-}
+} */

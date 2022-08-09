@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import EditPokemon from '../../containers/EditPokemon/EditPokemon';
 import card from '../../img/card.png';
 import StatsRanges from '../StatsRanges/StatsRanges';
 import s from './PokemonDetailCard.module.css';
@@ -21,6 +22,7 @@ export default function PokemonDetailCard({
   evolutionChain,
 }) {
   const [deletePoke, setDeletePoke] = useState(false);
+  const [editPoke, setEditPoke] = useState(false);
 
   function importAll(r) {
     let images = {};
@@ -30,20 +32,22 @@ export default function PokemonDetailCard({
   const typeIcons = importAll(
     require.context('../../img/PokemonTypes', false, /\.png/)
   );
-  const handleDeleteClick = () => {
-    setDeletePoke(true);
+
+  const handleEditClose = () => {
+    setEditPoke(false);
   };
+
   return (
     <div className={s.container}>
       {!Number(id) ? (
         <div className={s.buttons}>
-          <button onClick={handleDeleteClick}>
+          <button onClick={() => setDeletePoke(true)}>
             <i
               className={`fa-solid fa-circle-minus fa-2xl ${s.delete} ${s.icon}`}
             />
             <span className={s.text}>Delete Pokémon</span>
           </button>
-          <button>
+          <button onClick={() => setEditPoke(true)}>
             <i className={`fa-solid fa-file-pen fa-2xl ${s.edit} ${s.icon}`} />
             <span className={s.text}>Edit Pokémon</span>
           </button>
@@ -67,6 +71,28 @@ export default function PokemonDetailCard({
               </button>
             </span>
           </div>
+        </div>
+      ) : (
+        <></>
+      )}
+      {editPoke ? (
+        <div className={s.deleteBackground}>
+          <EditPokemon
+            valuesToUpdate={{
+              id,
+              name,
+              types,
+              weight,
+              height,
+              hp,
+              attack,
+              specialAttack,
+              defense,
+              specialDefense,
+              speed,
+            }}
+            handleEditClose={handleEditClose}
+          />
         </div>
       ) : (
         <></>
