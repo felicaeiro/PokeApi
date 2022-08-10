@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import PokemonForm from '../../components/PokemonForm/PokemonForm';
-import { getPokemonDetail, updatePokemon } from '../../redux/actions';
 import s from './EditPokemon.module.css';
 
-function EditPokemon({ valuesToUpdate, handleEditClose, handleEditSubmit }) {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const [success, setSuccess] = useState(false);
-
+function EditPokemon({
+  valuesToUpdate,
+  handleEditClose,
+  handleEdit,
+  allPokemon,
+  allTypes,
+}) {
   const [valuesUpdated, setValuesUpdated] = useState(valuesToUpdate);
   const [notValid, setNotValid] = useState({});
-  const { types, allPokemon } = useSelector((state) => state.data);
 
   const handleChange = (e) => {
     setValuesUpdated({ ...valuesUpdated, [e.target.name]: e.target.value });
@@ -173,20 +171,22 @@ function EditPokemon({ valuesToUpdate, handleEditClose, handleEditSubmit }) {
       if (valuesToUpdate.name === valuesUpdated.name) {
         setValuesUpdated(delete valuesUpdated.name);
       }
-      dispatch(updatePokemon(valuesUpdated));
       setNotValid({});
+      handleEdit(valuesUpdated);
     }
   };
   return (
     <div className={s.container}>
-      <button onClick={handleEditClose}>X</button>
+      <button className={s.closeButton} onClick={handleEditClose}>
+        X
+      </button>
       <PokemonForm
         values={valuesUpdated}
         notValid={notValid}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         handleChecked={handleChecked}
-        types={types}
+        types={allTypes}
         selectedTypes={valuesUpdated.types}
         button={'Edit Pokémon'}
       />

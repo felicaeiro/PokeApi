@@ -22,13 +22,9 @@ export default function Home() {
   }, [dispatch]);
 
   const {
-    data: { allPokemon, loading, error },
+    data: { loading, error },
     visibility: { sort, pokeSearch },
   } = useSelector((state) => state);
-
-  allPokemon.forEach((x) =>
-    Number(x.id) ? (x.source = 'api') : (x.source = 'db')
-  );
 
   const handleSelectSorter = (e) => {
     let sorter = sort;

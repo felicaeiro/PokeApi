@@ -98,8 +98,8 @@
 }
 
 /* For Firefox browsers */
-/* input[type='range'] ::-moz-range-thumb {
-  background-color: #f1f5f7;
+.container input[type='range']::-moz-range-thumb {
+  background-color: transparent;
   background-image: url('../../img/jigglypuff.png');
   background-size: contain;
   background-position: center center;
@@ -111,4 +111,4 @@
   width: 35px;
   pointer-events: all;
   position: relative;
-} */
+}

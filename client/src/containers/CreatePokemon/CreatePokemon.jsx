@@ -7,6 +7,7 @@ import {
   getAllPokemon,
   getAllTypes,
   resetFilters,
+  updatePokemon,
 } from '../../redux/actions';
 import s from './CreatePokemon.module.css';
 import Loading from '../../components/Loading/Loading';
@@ -217,7 +218,10 @@ export default function CreatePokemon() {
     dispatch(deletePokemon(id));
     dispatch(resetFilters());
     history.push('/home');
-    window.location.reload();
+  };
+  const handleEdit = (valuesUpdated) => {
+    dispatch(updatePokemon(valuesUpdated));
+    history.push(`/pokemonDetail/${valuesUpdated.id}`);
   };
   if (loading) return <Loading />;
   if (error) return <Error />;
@@ -227,6 +231,9 @@ export default function CreatePokemon() {
         handleDelete={handleDelete}
         poke={createdPokemon}
         handleClick={handleCreatedClick}
+        handleEdit={handleEdit}
+        allTypes={types}
+        allPokemon={allPokemon}
       />
     );
   }

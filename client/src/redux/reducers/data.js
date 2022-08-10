@@ -16,6 +16,8 @@ const initialState = {
   types: [],
   pokemonDetail: {},
   createdPokemon: {},
+  updatedPokemon: [],
+  deletedPokemon: [],
   evolutionChain: [],
   loading: false,
   error: null,
@@ -54,7 +56,6 @@ const data = (state = initialState, action) => {
       return {
         ...state,
         evolutionChain: action.payload,
-        loading: false,
         error: null,
       };
     case CLEAR_EVOLUTION_CHAIN:
@@ -65,12 +66,14 @@ const data = (state = initialState, action) => {
     case UPDATE_POKEMON:
       return {
         ...state,
+        updatedPokemon: action.payload,
         loading: false,
         error: null,
       };
     case DELETE_POKEMON:
       return {
         ...state,
+        deletedPokemon: action.payload,
         loading: false,
         error: null,
       };

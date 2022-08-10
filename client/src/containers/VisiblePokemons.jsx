@@ -9,6 +9,9 @@ import {
 } from '../redux/actions';
 
 const filterPokemons = (pokemons, search, filters) => {
+  pokemons.forEach((x) =>
+    Number(x.id) ? (x.source = 'api') : (x.source = 'db')
+  );
   let result = pokemons.filter((p) => p.name.includes(search));
   result = result.filter((poke) =>
     filters.every((filter) => {

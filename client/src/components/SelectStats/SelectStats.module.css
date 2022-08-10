@@ -57,6 +57,19 @@ textarea {
   background-repeat: no-repeat;
   cursor: pointer;
 }
+
+.container input[type='range']::-moz-range-thumb {
+  background-image: url('../../img/rangethumb.png');
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  pointer-events: all;
+}
 .minmax {
   font-size: 1rem;
 }

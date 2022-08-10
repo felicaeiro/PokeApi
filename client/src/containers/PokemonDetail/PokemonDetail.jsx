@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/Loading/Loading';
 import Error from '../../components/Error/Error';
@@ -10,6 +10,7 @@ import {
   getEvolutionChain,
   getPokemonDetail,
   resetFilters,
+  updatePokemon,
 } from '../../redux/actions';
 import s from './PokemonDetail.module.css';
 import { Link, useHistory } from 'react-router-dom';
@@ -33,16 +34,26 @@ export default function PokemonDetail({ match }) {
 
   const {
     pokemonDetail: poke,
+    allPokemon,
+    types: allTypes,
+    updatedPokemon,
     evolutionChain,
     loading,
     error,
   } = useSelector((state) => state.data);
 
+  useEffect(() => {
+    dispatch(getPokemonDetail(idPokemon));
+  }, [updatedPokemon]);
+
   const handleDelete = (id) => {
     dispatch(deletePokemon(id));
     dispatch(resetFilters());
     history.push('/home');
-    window.location.reload();
+  };
+
+  const handleEdit = (valuesUpdated) => {
+    dispatch(updatePokemon(valuesUpdated));
   };
 
   if (loading) return <Loading />;
@@ -52,8 +63,9 @@ export default function PokemonDetail({ match }) {
     <div>
       {poke.id && (
         <PokemonDetailCard
-          id={poke.id}
           handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          id={poke.id}
           name={poke.name}
           types={poke.types}
           weight={poke.weight}
@@ -66,6 +78,8 @@ export default function PokemonDetail({ match }) {
           speed={poke.speed}
           img={poke.img}
           evolutionChain={evolutionChain}
+          allTypes={allTypes}
+          allPokemon={allPokemon}
         />
       )}
       <div className={`${s.button} ${poke.id && s[poke.types[0]]}`}>

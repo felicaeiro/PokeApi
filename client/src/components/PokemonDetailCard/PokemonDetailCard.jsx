@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import EditPokemon from '../../containers/EditPokemon/EditPokemon';
+import EditPokemon from '../EditPokemon/EditPokemon';
 import card from '../../img/card.png';
 import StatsRanges from '../StatsRanges/StatsRanges';
 import s from './PokemonDetailCard.module.css';
@@ -8,6 +8,7 @@ import s from './PokemonDetailCard.module.css';
 export default function PokemonDetailCard({
   id,
   handleDelete,
+  handleEdit,
   name,
   types,
   height,
@@ -20,6 +21,8 @@ export default function PokemonDetailCard({
   speed,
   img,
   evolutionChain,
+  allTypes,
+  allPokemon,
 }) {
   const [deletePoke, setDeletePoke] = useState(false);
   const [editPoke, setEditPoke] = useState(false);
@@ -92,6 +95,9 @@ export default function PokemonDetailCard({
               speed,
             }}
             handleEditClose={handleEditClose}
+            handleEdit={handleEdit}
+            allTypes={allTypes}
+            allPokemon={allPokemon}
           />
         </div>
       ) : (

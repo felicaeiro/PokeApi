@@ -73,6 +73,11 @@
   -webkit-appearance: none;
   appearance: none;
 }
+.statsRanges input[type='range']::-moz-range-thumb {
+  appearance: none;
+  border: none;
+  background-color: transparent;
+}
 .deleteBackground {
   top: 0;
   left: 0;
@@ -200,5 +205,5 @@
   color: tomato;
 }
 .edit {
-  color: rgb(4, 4, 135);
+  color: rgb(47, 117, 141);
 }

@@ -100,6 +100,7 @@ export const getPokemonDetail = (idPokemon) => {
       });
   };
 };
+
 export const deletePokemon = (id) => {
   return async function (dispatch) {
     dispatch(loading);
@@ -117,7 +118,7 @@ export const deletePokemon = (id) => {
 
 export const updatePokemon = (data) => {
   return async function (dispatch) {
-    dispatch(loading);
+    dispatch(loading());
     await axios
       .put('/pokemons', data)
       .then((response) =>
