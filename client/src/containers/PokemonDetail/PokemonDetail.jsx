@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/Loading/Loading';
 import Error from '../../components/Error/Error';
@@ -44,7 +44,7 @@ export default function PokemonDetail({ match }) {
 
   useEffect(() => {
     dispatch(getPokemonDetail(idPokemon));
-  }, [updatedPokemon]);
+  }, [updatedPokemon, dispatch, idPokemon]);
 
   const handleDelete = (id) => {
     dispatch(deletePokemon(id));

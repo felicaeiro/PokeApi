@@ -1,9 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 .container {
-  display: flex;
-  justify-content: center;
   margin-top: 12px;
-  padding-bottom: 30px;
 }
 
 .pagination {
@@ -39,9 +36,8 @@
 }
 .show {
   font-size: 1em;
-  width: 180px;
-  position: absolute;
-  right: 20rem;
+  margin-right: 8rem;
+  text-align: right;
 }
 .select {
   height: 35px;

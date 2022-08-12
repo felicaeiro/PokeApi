@@ -5,6 +5,7 @@ import {
   getAllPokemon,
   getAllTypes,
   getPokeByName,
+  resetFilters,
   setSort,
 } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +20,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(getAllPokemon());
     dispatch(getAllTypes());
+    dispatch(resetFilters());
   }, [dispatch]);
 
   const {
